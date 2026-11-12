@@ -1,0 +1,489 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum FarmRole {
+  OWNER
+  PARTNER
+  ACCOUNTANT
+  MANAGER
+  WORKER
+  AUDITOR
+}
+
+enum MembershipStatus {
+  INVITED
+  ACTIVE
+  SUSPENDED
+  LEFT
+}
+
+enum JoinRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AccountStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ContributionType {
+  INITIAL_CAPITAL
+  ADDITIONAL_CAPITAL
+}
+
+enum ExpenseCategory {
+  FEED
+  MEDICINE
+  VETERINARY
+  SALARY
+  ELECTRICITY
+  TRANSPORT
+  EQUIPMENT
+  MAINTENANCE
+  OTHER
+}
+
+enum RecordStatus {
+  DRAFT
+  APPROVED
+  REJECTED
+  VOIDED
+}
+
+enum CowGender {
+  FEMALE
+  MALE
+}
+
+enum CowStatus {
+  ACTIVE
+  SOLD
+  DECEASED
+  TRANSFERRED
+}
+
+enum CowStage {
+  CALF
+  HEIFER
+  LACTATING
+  DRY
+  BREEDING
+}
+
+// ==========================================
+// USER
+// ==========================================
+
+model User {
+  id           String @id @default(cuid())
+  name         String
+  email        String @unique
+  passwordHash String
+
+  isSuperAdmin Boolean @default(false)
+
+  accountStatus       AccountStatus @default(PENDING)
+  accountReviewedById String?
+  accountReviewedAt   DateTime?
+  accountReviewNote   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Account review
+  accountReviewedBy User?  @relation("AccountReviewer", fields: [accountReviewedById], references: [id], onDelete: SetNull)
+  accountsReviewed  User[] @relation("AccountReviewer")
+
+  // Farm relationships
+  memberships  FarmMembership[]
+  createdFarms Farm[]           @relation("FarmCreator")
+
+  // Join requests
+  joinRequests         FarmJoinRequest[] @relation("JoinRequestApplicant")
+  reviewedJoinRequests FarmJoinRequest[] @relation("JoinRequestReviewer")
+
+  // Milk production
+  milkProductions MilkProduction[] @relation("MilkProductionRecorder")
+
+  // Capital contributions
+  contributionsMade     CapitalContribution[] @relation("ContributionPartner")
+  recordedContributions CapitalContribution[] @relation("ContributionRecorder")
+
+  // Expenses
+  createdExpenses Expense[] @relation("ExpenseCreator")
+
+  // Expense payments
+  expensePayments  ExpensePayment[] @relation("ExpensePaymentPartner")
+  recordedPayments ExpensePayment[] @relation("ExpensePaymentRecorder")
+
+  // Financial income
+  financialIncomes FinancialIncome[] @relation("IncomeRecorder")
+
+  // Feed management
+  feedItems        FeedItem[]
+  feedPurchases    FeedPurchase[]    @relation("FeedPurchaseRecorder")
+  feedConsumptions FeedConsumption[] @relation("FeedConsumptionRecorder")
+  feedExpenses     FeedExpense[]     @relation("FeedExpenseRecorder")
+
+  @@index([isSuperAdmin])
+  @@index([accountStatus, createdAt])
+}
+
+// ==========================================
+// FARM
+// ==========================================
+
+model Farm {
+  id          String  @id @default(cuid())
+  name        String  @default("My Dairy Farm")
+  address     String?
+  phone       String?
+  email       String?
+  description String?
+  currency    String  @default("INR")
+
+  createdById String @unique
+  createdBy   User   @relation("FarmCreator", fields: [createdById], references: [id], onDelete: Restrict)
+
+  memberships  FarmMembership[]
+  cows         Cow[]
+  joinRequests FarmJoinRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ==========================================
+// FARM MEMBERSHIP
+// ==========================================
+
+model FarmMembership {
+  id     String @id @default(cuid())
+  farmId String
+  userId String
+
+  role   FarmRole         @default(PARTNER)
+  status MembershipStatus @default(ACTIVE)
+
+  joinedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Restrict)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([farmId, userId])
+  @@index([userId, status])
+  @@index([farmId, status])
+}
+
+// ==========================================
+// FARM JOIN REQUEST
+// ==========================================
+
+model FarmJoinRequest {
+  id      String  @id @default(cuid())
+  farmId  String
+  userId  String
+  message String?
+
+  status JoinRequestStatus @default(PENDING)
+
+  reviewedById String?
+  reviewNote   String?
+  requestedAt  DateTime  @default(now())
+  reviewedAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  farm       Farm  @relation(fields: [farmId], references: [id], onDelete: Restrict)
+  user       User  @relation("JoinRequestApplicant", fields: [userId], references: [id], onDelete: Restrict)
+  reviewedBy User? @relation("JoinRequestReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@unique([farmId, userId])
+  @@index([status, requestedAt])
+  @@index([userId, status])
+}
+
+// ==========================================
+// CAPITAL CONTRIBUTIONS
+// ==========================================
+
+model CapitalContribution {
+  id        String @id @default(cuid())
+  partnerId String
+  partner   User   @relation("ContributionPartner", fields: [partnerId], references: [id], onDelete: Restrict)
+
+  contributionType ContributionType
+  amount           Decimal          @db.Decimal(12, 2)
+  contributionDate DateTime         @default(now())
+  description      String?
+  status           RecordStatus     @default(DRAFT)
+
+  recordedById String
+  recordedBy   User   @relation("ContributionRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([partnerId, contributionDate])
+  @@index([status])
+  @@index([contributionDate])
+}
+
+// ==========================================
+// EXPENSES
+// Keep ONLY this Expense model.
+// No farmId.
+// ==========================================
+
+model Expense {
+  id          String          @id @default(cuid())
+  title       String
+  description String?
+  category    ExpenseCategory
+  amount      Decimal         @db.Decimal(12, 2)
+  expenseDate DateTime        @default(now())
+  status      RecordStatus    @default(DRAFT)
+
+  createdById String
+  createdBy   User   @relation("ExpenseCreator", fields: [createdById], references: [id], onDelete: Restrict)
+
+  payments ExpensePayment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([expenseDate])
+  @@index([category])
+  @@index([status])
+}
+
+// ==========================================
+// EXPENSE PAYMENTS
+// Keep ONLY this ExpensePayment model.
+// No farmId.
+// ==========================================
+
+model ExpensePayment {
+  id        String  @id @default(cuid())
+  expenseId String
+  expense   Expense @relation(fields: [expenseId], references: [id], onDelete: Restrict)
+
+  partnerId String
+  partner   User   @relation("ExpensePaymentPartner", fields: [partnerId], references: [id], onDelete: Restrict)
+
+  amount        Decimal  @db.Decimal(12, 2)
+  paymentDate   DateTime @default(now())
+  paymentMethod String?
+  reference     String?
+
+  recordedById String
+  recordedBy   User   @relation("ExpensePaymentRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([expenseId, paymentDate])
+  @@index([partnerId, paymentDate])
+}
+
+// ==========================================
+// FINANCIAL INCOME
+// Keep ONLY this FinancialIncome model.
+// ==========================================
+
+model FinancialIncome {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  category    String       @default("OTHER")
+  amount      Decimal      @db.Decimal(12, 2)
+  incomeDate  DateTime     @default(now())
+  status      RecordStatus @default(DRAFT)
+
+  recordedById String
+  recordedBy   User   @relation("IncomeRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([incomeDate])
+  @@index([status])
+}
+
+// ==========================================
+// COW MANAGEMENT
+// ==========================================
+
+model Cow {
+  id        String    @id @default(cuid())
+  tagNumber String
+  name      String?
+  breed     String?
+  gender    CowGender @default(FEMALE)
+
+  dateOfBirth   DateTime?
+  acquiredAt    DateTime?
+  purchasePrice Decimal?  @db.Decimal(12, 2)
+
+  status CowStatus @default(ACTIVE)
+  stage  CowStage
+
+  photoUrl    String?
+  description String?
+
+  farmId String
+  farm   Farm   @relation(fields: [farmId], references: [id], onDelete: Restrict)
+
+  milkProductions  MilkProduction[]
+  feedConsumptions FeedConsumption[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([farmId, tagNumber])
+  @@index([farmId, status])
+  @@index([farmId, stage])
+}
+
+// ==========================================
+// MILK PRODUCTION
+// ==========================================
+
+model MilkProduction {
+  id String @id @default(cuid())
+
+  cowId String
+  cow   Cow    @relation(fields: [cowId], references: [id], onDelete: Restrict)
+
+  productionDate DateTime @db.Date
+
+  morningYield Decimal? @db.Decimal(10, 2)
+  eveningYield Decimal? @db.Decimal(10, 2)
+
+  notes String?
+
+  recordedById String
+  recordedBy   User   @relation("MilkProductionRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([cowId, productionDate])
+  @@index([productionDate])
+  @@index([recordedById])
+}
+
+// ==========================================
+// FEED MANAGEMENT
+// ==========================================
+
+model FeedItem {
+  id String @id @default(cuid())
+
+  name        String
+  description String?
+  unit        String
+
+  currentStock Decimal @default(0) @db.Decimal(12, 3)
+  reorderLevel Decimal @default(0) @db.Decimal(12, 3)
+
+  isActive Boolean @default(true)
+
+  purchases    FeedPurchase[]
+  consumptions FeedConsumption[]
+
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name])
+  @@index([isActive])
+}
+
+model FeedPurchase {
+  id String @id @default(cuid())
+
+  feedItemId String
+  feedItem   FeedItem @relation(fields: [feedItemId], references: [id], onDelete: Restrict)
+
+  quantity  Decimal @db.Decimal(12, 3)
+  unitPrice Decimal @db.Decimal(12, 2)
+  totalCost Decimal @db.Decimal(12, 2)
+
+  supplier      String?
+  invoiceNumber String?
+  purchaseDate  DateTime @default(now())
+  notes         String?
+
+  recordedById String
+  recordedBy   User   @relation("FeedPurchaseRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([feedItemId, purchaseDate])
+  @@index([purchaseDate])
+}
+
+model FeedConsumption {
+  id String @id @default(cuid())
+
+  feedItemId String
+  feedItem   FeedItem @relation(fields: [feedItemId], references: [id], onDelete: Restrict)
+
+  cowId String?
+  cow   Cow?    @relation(fields: [cowId], references: [id], onDelete: Restrict)
+
+  quantity        Decimal  @db.Decimal(12, 3)
+  consumptionDate DateTime @db.Date
+
+  notes String?
+
+  recordedById String
+  recordedBy   User   @relation("FeedConsumptionRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([feedItemId, consumptionDate])
+  @@index([cowId, consumptionDate])
+  @@index([consumptionDate])
+}
+
+model FeedExpense {
+  id String @id @default(cuid())
+
+  title       String
+  description String?
+
+  amount      Decimal  @db.Decimal(12, 2)
+  expenseDate DateTime @default(now())
+  category    String   @default("OTHER")
+
+  recordedById String
+  recordedBy   User   @relation("FeedExpenseRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([expenseDate])
+  @@index([category])
+}
