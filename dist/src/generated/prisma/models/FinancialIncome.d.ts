@@ -1,0 +1,1390 @@
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums.js";
+import type * as Prisma from "../internal/prismaNamespace.js";
+/**
+ * Model FinancialIncome
+ *
+ */
+export type FinancialIncomeModel = runtime.Types.Result.DefaultSelection<Prisma.$FinancialIncomePayload>;
+export type AggregateFinancialIncome = {
+    _count: FinancialIncomeCountAggregateOutputType | null;
+    _avg: FinancialIncomeAvgAggregateOutputType | null;
+    _sum: FinancialIncomeSumAggregateOutputType | null;
+    _min: FinancialIncomeMinAggregateOutputType | null;
+    _max: FinancialIncomeMaxAggregateOutputType | null;
+};
+export type FinancialIncomeAvgAggregateOutputType = {
+    amount: runtime.Decimal | null;
+};
+export type FinancialIncomeSumAggregateOutputType = {
+    amount: runtime.Decimal | null;
+};
+export type FinancialIncomeMinAggregateOutputType = {
+    id: string | null;
+    title: string | null;
+    description: string | null;
+    category: string | null;
+    amount: runtime.Decimal | null;
+    incomeDate: Date | null;
+    status: $Enums.RecordStatus | null;
+    recordedById: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+export type FinancialIncomeMaxAggregateOutputType = {
+    id: string | null;
+    title: string | null;
+    description: string | null;
+    category: string | null;
+    amount: runtime.Decimal | null;
+    incomeDate: Date | null;
+    status: $Enums.RecordStatus | null;
+    recordedById: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+export type FinancialIncomeCountAggregateOutputType = {
+    id: number;
+    title: number;
+    description: number;
+    category: number;
+    amount: number;
+    incomeDate: number;
+    status: number;
+    recordedById: number;
+    createdAt: number;
+    updatedAt: number;
+    _all: number;
+};
+export type FinancialIncomeAvgAggregateInputType = {
+    amount?: true;
+};
+export type FinancialIncomeSumAggregateInputType = {
+    amount?: true;
+};
+export type FinancialIncomeMinAggregateInputType = {
+    id?: true;
+    title?: true;
+    description?: true;
+    category?: true;
+    amount?: true;
+    incomeDate?: true;
+    status?: true;
+    recordedById?: true;
+    createdAt?: true;
+    updatedAt?: true;
+};
+export type FinancialIncomeMaxAggregateInputType = {
+    id?: true;
+    title?: true;
+    description?: true;
+    category?: true;
+    amount?: true;
+    incomeDate?: true;
+    status?: true;
+    recordedById?: true;
+    createdAt?: true;
+    updatedAt?: true;
+};
+export type FinancialIncomeCountAggregateInputType = {
+    id?: true;
+    title?: true;
+    description?: true;
+    category?: true;
+    amount?: true;
+    incomeDate?: true;
+    status?: true;
+    recordedById?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    _all?: true;
+};
+export type FinancialIncomeAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinancialIncome to aggregate.
+     */
+    where?: Prisma.FinancialIncomeWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FinancialIncomes to fetch.
+     */
+    orderBy?: Prisma.FinancialIncomeOrderByWithRelationInput | Prisma.FinancialIncomeOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: Prisma.FinancialIncomeWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FinancialIncomes from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FinancialIncomes.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned FinancialIncomes
+    **/
+    _count?: true | FinancialIncomeCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+    **/
+    _avg?: FinancialIncomeAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+    **/
+    _sum?: FinancialIncomeSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: FinancialIncomeMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: FinancialIncomeMaxAggregateInputType;
+};
+export type GetFinancialIncomeAggregateType<T extends FinancialIncomeAggregateArgs> = {
+    [P in keyof T & keyof AggregateFinancialIncome]: P extends '_count' | 'count' ? T[P] extends true ? number : Prisma.GetScalarType<T[P], AggregateFinancialIncome[P]> : Prisma.GetScalarType<T[P], AggregateFinancialIncome[P]>;
+};
+export type FinancialIncomeGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.FinancialIncomeWhereInput;
+    orderBy?: Prisma.FinancialIncomeOrderByWithAggregationInput | Prisma.FinancialIncomeOrderByWithAggregationInput[];
+    by: Prisma.FinancialIncomeScalarFieldEnum[] | Prisma.FinancialIncomeScalarFieldEnum;
+    having?: Prisma.FinancialIncomeScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: FinancialIncomeCountAggregateInputType | true;
+    _avg?: FinancialIncomeAvgAggregateInputType;
+    _sum?: FinancialIncomeSumAggregateInputType;
+    _min?: FinancialIncomeMinAggregateInputType;
+    _max?: FinancialIncomeMaxAggregateInputType;
+};
+export type FinancialIncomeGroupByOutputType = {
+    id: string;
+    title: string;
+    description: string | null;
+    category: string;
+    amount: runtime.Decimal;
+    incomeDate: Date;
+    status: $Enums.RecordStatus;
+    recordedById: string;
+    createdAt: Date;
+    updatedAt: Date;
+    _count: FinancialIncomeCountAggregateOutputType | null;
+    _avg: FinancialIncomeAvgAggregateOutputType | null;
+    _sum: FinancialIncomeSumAggregateOutputType | null;
+    _min: FinancialIncomeMinAggregateOutputType | null;
+    _max: FinancialIncomeMaxAggregateOutputType | null;
+};
+export type GetFinancialIncomeGroupByPayload<T extends FinancialIncomeGroupByArgs> = Prisma.PrismaPromise<Array<Prisma.PickEnumerable<FinancialIncomeGroupByOutputType, T['by']> & {
+    [P in ((keyof T) & (keyof FinancialIncomeGroupByOutputType))]: P extends '_count' ? T[P] extends boolean ? number : Prisma.GetScalarType<T[P], FinancialIncomeGroupByOutputType[P]> : Prisma.GetScalarType<T[P], FinancialIncomeGroupByOutputType[P]>;
+}>>;
+export type FinancialIncomeWhereInput = {
+    AND?: Prisma.FinancialIncomeWhereInput | Prisma.FinancialIncomeWhereInput[];
+    OR?: Prisma.FinancialIncomeWhereInput[];
+    NOT?: Prisma.FinancialIncomeWhereInput | Prisma.FinancialIncomeWhereInput[];
+    id?: Prisma.StringFilter<"FinancialIncome"> | string;
+    title?: Prisma.StringFilter<"FinancialIncome"> | string;
+    description?: Prisma.StringNullableFilter<"FinancialIncome"> | string | null;
+    category?: Prisma.StringFilter<"FinancialIncome"> | string;
+    amount?: Prisma.DecimalFilter<"FinancialIncome"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    status?: Prisma.EnumRecordStatusFilter<"FinancialIncome"> | $Enums.RecordStatus;
+    recordedById?: Prisma.StringFilter<"FinancialIncome"> | string;
+    createdAt?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    recordedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
+};
+export type FinancialIncomeOrderByWithRelationInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrderInput | Prisma.SortOrder;
+    category?: Prisma.SortOrder;
+    amount?: Prisma.SortOrder;
+    incomeDate?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    recordedById?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+    recordedBy?: Prisma.UserOrderByWithRelationInput;
+};
+export type FinancialIncomeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string;
+    AND?: Prisma.FinancialIncomeWhereInput | Prisma.FinancialIncomeWhereInput[];
+    OR?: Prisma.FinancialIncomeWhereInput[];
+    NOT?: Prisma.FinancialIncomeWhereInput | Prisma.FinancialIncomeWhereInput[];
+    title?: Prisma.StringFilter<"FinancialIncome"> | string;
+    description?: Prisma.StringNullableFilter<"FinancialIncome"> | string | null;
+    category?: Prisma.StringFilter<"FinancialIncome"> | string;
+    amount?: Prisma.DecimalFilter<"FinancialIncome"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    status?: Prisma.EnumRecordStatusFilter<"FinancialIncome"> | $Enums.RecordStatus;
+    recordedById?: Prisma.StringFilter<"FinancialIncome"> | string;
+    createdAt?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    recordedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
+}, "id">;
+export type FinancialIncomeOrderByWithAggregationInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrderInput | Prisma.SortOrder;
+    category?: Prisma.SortOrder;
+    amount?: Prisma.SortOrder;
+    incomeDate?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    recordedById?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+    _count?: Prisma.FinancialIncomeCountOrderByAggregateInput;
+    _avg?: Prisma.FinancialIncomeAvgOrderByAggregateInput;
+    _max?: Prisma.FinancialIncomeMaxOrderByAggregateInput;
+    _min?: Prisma.FinancialIncomeMinOrderByAggregateInput;
+    _sum?: Prisma.FinancialIncomeSumOrderByAggregateInput;
+};
+export type FinancialIncomeScalarWhereWithAggregatesInput = {
+    AND?: Prisma.FinancialIncomeScalarWhereWithAggregatesInput | Prisma.FinancialIncomeScalarWhereWithAggregatesInput[];
+    OR?: Prisma.FinancialIncomeScalarWhereWithAggregatesInput[];
+    NOT?: Prisma.FinancialIncomeScalarWhereWithAggregatesInput | Prisma.FinancialIncomeScalarWhereWithAggregatesInput[];
+    id?: Prisma.StringWithAggregatesFilter<"FinancialIncome"> | string;
+    title?: Prisma.StringWithAggregatesFilter<"FinancialIncome"> | string;
+    description?: Prisma.StringNullableWithAggregatesFilter<"FinancialIncome"> | string | null;
+    category?: Prisma.StringWithAggregatesFilter<"FinancialIncome"> | string;
+    amount?: Prisma.DecimalWithAggregatesFilter<"FinancialIncome"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeWithAggregatesFilter<"FinancialIncome"> | Date | string;
+    status?: Prisma.EnumRecordStatusWithAggregatesFilter<"FinancialIncome"> | $Enums.RecordStatus;
+    recordedById?: Prisma.StringWithAggregatesFilter<"FinancialIncome"> | string;
+    createdAt?: Prisma.DateTimeWithAggregatesFilter<"FinancialIncome"> | Date | string;
+    updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FinancialIncome"> | Date | string;
+};
+export type FinancialIncomeCreateInput = {
+    id?: string;
+    title: string;
+    description?: string | null;
+    category?: string;
+    amount: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Date | string;
+    status?: $Enums.RecordStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    recordedBy: Prisma.UserCreateNestedOneWithoutFinancialIncomesInput;
+};
+export type FinancialIncomeUncheckedCreateInput = {
+    id?: string;
+    title: string;
+    description?: string | null;
+    category?: string;
+    amount: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Date | string;
+    status?: $Enums.RecordStatus;
+    recordedById: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type FinancialIncomeUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.StringFieldUpdateOperationsInput | string;
+    amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    status?: Prisma.EnumRecordStatusFieldUpdateOperationsInput | $Enums.RecordStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    recordedBy?: Prisma.UserUpdateOneRequiredWithoutFinancialIncomesNestedInput;
+};
+export type FinancialIncomeUncheckedUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.StringFieldUpdateOperationsInput | string;
+    amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    status?: Prisma.EnumRecordStatusFieldUpdateOperationsInput | $Enums.RecordStatus;
+    recordedById?: Prisma.StringFieldUpdateOperationsInput | string;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type FinancialIncomeCreateManyInput = {
+    id?: string;
+    title: string;
+    description?: string | null;
+    category?: string;
+    amount: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Date | string;
+    status?: $Enums.RecordStatus;
+    recordedById: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type FinancialIncomeUpdateManyMutationInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.StringFieldUpdateOperationsInput | string;
+    amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    status?: Prisma.EnumRecordStatusFieldUpdateOperationsInput | $Enums.RecordStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type FinancialIncomeUncheckedUpdateManyInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.StringFieldUpdateOperationsInput | string;
+    amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    status?: Prisma.EnumRecordStatusFieldUpdateOperationsInput | $Enums.RecordStatus;
+    recordedById?: Prisma.StringFieldUpdateOperationsInput | string;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type FinancialIncomeListRelationFilter = {
+    every?: Prisma.FinancialIncomeWhereInput;
+    some?: Prisma.FinancialIncomeWhereInput;
+    none?: Prisma.FinancialIncomeWhereInput;
+};
+export type FinancialIncomeOrderByRelationAggregateInput = {
+    _count?: Prisma.SortOrder;
+};
+export type FinancialIncomeCountOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    category?: Prisma.SortOrder;
+    amount?: Prisma.SortOrder;
+    incomeDate?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    recordedById?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type FinancialIncomeAvgOrderByAggregateInput = {
+    amount?: Prisma.SortOrder;
+};
+export type FinancialIncomeMaxOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    category?: Prisma.SortOrder;
+    amount?: Prisma.SortOrder;
+    incomeDate?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    recordedById?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type FinancialIncomeMinOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    category?: Prisma.SortOrder;
+    amount?: Prisma.SortOrder;
+    incomeDate?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    recordedById?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type FinancialIncomeSumOrderByAggregateInput = {
+    amount?: Prisma.SortOrder;
+};
+export type FinancialIncomeCreateNestedManyWithoutRecordedByInput = {
+    create?: Prisma.XOR<Prisma.FinancialIncomeCreateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput> | Prisma.FinancialIncomeCreateWithoutRecordedByInput[] | Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput[];
+    connectOrCreate?: Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput | Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput[];
+    createMany?: Prisma.FinancialIncomeCreateManyRecordedByInputEnvelope;
+    connect?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+};
+export type FinancialIncomeUncheckedCreateNestedManyWithoutRecordedByInput = {
+    create?: Prisma.XOR<Prisma.FinancialIncomeCreateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput> | Prisma.FinancialIncomeCreateWithoutRecordedByInput[] | Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput[];
+    connectOrCreate?: Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput | Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput[];
+    createMany?: Prisma.FinancialIncomeCreateManyRecordedByInputEnvelope;
+    connect?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+};
+export type FinancialIncomeUpdateManyWithoutRecordedByNestedInput = {
+    create?: Prisma.XOR<Prisma.FinancialIncomeCreateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput> | Prisma.FinancialIncomeCreateWithoutRecordedByInput[] | Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput[];
+    connectOrCreate?: Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput | Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput[];
+    upsert?: Prisma.FinancialIncomeUpsertWithWhereUniqueWithoutRecordedByInput | Prisma.FinancialIncomeUpsertWithWhereUniqueWithoutRecordedByInput[];
+    createMany?: Prisma.FinancialIncomeCreateManyRecordedByInputEnvelope;
+    set?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    disconnect?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    delete?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    connect?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    update?: Prisma.FinancialIncomeUpdateWithWhereUniqueWithoutRecordedByInput | Prisma.FinancialIncomeUpdateWithWhereUniqueWithoutRecordedByInput[];
+    updateMany?: Prisma.FinancialIncomeUpdateManyWithWhereWithoutRecordedByInput | Prisma.FinancialIncomeUpdateManyWithWhereWithoutRecordedByInput[];
+    deleteMany?: Prisma.FinancialIncomeScalarWhereInput | Prisma.FinancialIncomeScalarWhereInput[];
+};
+export type FinancialIncomeUncheckedUpdateManyWithoutRecordedByNestedInput = {
+    create?: Prisma.XOR<Prisma.FinancialIncomeCreateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput> | Prisma.FinancialIncomeCreateWithoutRecordedByInput[] | Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput[];
+    connectOrCreate?: Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput | Prisma.FinancialIncomeCreateOrConnectWithoutRecordedByInput[];
+    upsert?: Prisma.FinancialIncomeUpsertWithWhereUniqueWithoutRecordedByInput | Prisma.FinancialIncomeUpsertWithWhereUniqueWithoutRecordedByInput[];
+    createMany?: Prisma.FinancialIncomeCreateManyRecordedByInputEnvelope;
+    set?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    disconnect?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    delete?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    connect?: Prisma.FinancialIncomeWhereUniqueInput | Prisma.FinancialIncomeWhereUniqueInput[];
+    update?: Prisma.FinancialIncomeUpdateWithWhereUniqueWithoutRecordedByInput | Prisma.FinancialIncomeUpdateWithWhereUniqueWithoutRecordedByInput[];
+    updateMany?: Prisma.FinancialIncomeUpdateManyWithWhereWithoutRecordedByInput | Prisma.FinancialIncomeUpdateManyWithWhereWithoutRecordedByInput[];
+    deleteMany?: Prisma.FinancialIncomeScalarWhereInput | Prisma.FinancialIncomeScalarWhereInput[];
+};
+export type FinancialIncomeCreateWithoutRecordedByInput = {
+    id?: string;
+    title: string;
+    description?: string | null;
+    category?: string;
+    amount: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Date | string;
+    status?: $Enums.RecordStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type FinancialIncomeUncheckedCreateWithoutRecordedByInput = {
+    id?: string;
+    title: string;
+    description?: string | null;
+    category?: string;
+    amount: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Date | string;
+    status?: $Enums.RecordStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type FinancialIncomeCreateOrConnectWithoutRecordedByInput = {
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+    create: Prisma.XOR<Prisma.FinancialIncomeCreateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput>;
+};
+export type FinancialIncomeCreateManyRecordedByInputEnvelope = {
+    data: Prisma.FinancialIncomeCreateManyRecordedByInput | Prisma.FinancialIncomeCreateManyRecordedByInput[];
+    skipDuplicates?: boolean;
+};
+export type FinancialIncomeUpsertWithWhereUniqueWithoutRecordedByInput = {
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+    update: Prisma.XOR<Prisma.FinancialIncomeUpdateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedUpdateWithoutRecordedByInput>;
+    create: Prisma.XOR<Prisma.FinancialIncomeCreateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedCreateWithoutRecordedByInput>;
+};
+export type FinancialIncomeUpdateWithWhereUniqueWithoutRecordedByInput = {
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+    data: Prisma.XOR<Prisma.FinancialIncomeUpdateWithoutRecordedByInput, Prisma.FinancialIncomeUncheckedUpdateWithoutRecordedByInput>;
+};
+export type FinancialIncomeUpdateManyWithWhereWithoutRecordedByInput = {
+    where: Prisma.FinancialIncomeScalarWhereInput;
+    data: Prisma.XOR<Prisma.FinancialIncomeUpdateManyMutationInput, Prisma.FinancialIncomeUncheckedUpdateManyWithoutRecordedByInput>;
+};
+export type FinancialIncomeScalarWhereInput = {
+    AND?: Prisma.FinancialIncomeScalarWhereInput | Prisma.FinancialIncomeScalarWhereInput[];
+    OR?: Prisma.FinancialIncomeScalarWhereInput[];
+    NOT?: Prisma.FinancialIncomeScalarWhereInput | Prisma.FinancialIncomeScalarWhereInput[];
+    id?: Prisma.StringFilter<"FinancialIncome"> | string;
+    title?: Prisma.StringFilter<"FinancialIncome"> | string;
+    description?: Prisma.StringNullableFilter<"FinancialIncome"> | string | null;
+    category?: Prisma.StringFilter<"FinancialIncome"> | string;
+    amount?: Prisma.DecimalFilter<"FinancialIncome"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    status?: Prisma.EnumRecordStatusFilter<"FinancialIncome"> | $Enums.RecordStatus;
+    recordedById?: Prisma.StringFilter<"FinancialIncome"> | string;
+    createdAt?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"FinancialIncome"> | Date | string;
+};
+export type FinancialIncomeCreateManyRecordedByInput = {
+    id?: string;
+    title: string;
+    description?: string | null;
+    category?: string;
+    amount: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Date | string;
+    status?: $Enums.RecordStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type FinancialIncomeUpdateWithoutRecordedByInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.StringFieldUpdateOperationsInput | string;
+    amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    status?: Prisma.EnumRecordStatusFieldUpdateOperationsInput | $Enums.RecordStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type FinancialIncomeUncheckedUpdateWithoutRecordedByInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.StringFieldUpdateOperationsInput | string;
+    amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    status?: Prisma.EnumRecordStatusFieldUpdateOperationsInput | $Enums.RecordStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type FinancialIncomeUncheckedUpdateManyWithoutRecordedByInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.StringFieldUpdateOperationsInput | string;
+    amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    incomeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    status?: Prisma.EnumRecordStatusFieldUpdateOperationsInput | $Enums.RecordStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type FinancialIncomeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    category?: boolean;
+    amount?: boolean;
+    incomeDate?: boolean;
+    status?: boolean;
+    recordedById?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["financialIncome"]>;
+export type FinancialIncomeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    category?: boolean;
+    amount?: boolean;
+    incomeDate?: boolean;
+    status?: boolean;
+    recordedById?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["financialIncome"]>;
+export type FinancialIncomeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    category?: boolean;
+    amount?: boolean;
+    incomeDate?: boolean;
+    status?: boolean;
+    recordedById?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["financialIncome"]>;
+export type FinancialIncomeSelectScalar = {
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    category?: boolean;
+    amount?: boolean;
+    incomeDate?: boolean;
+    status?: boolean;
+    recordedById?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+};
+export type FinancialIncomeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "category" | "amount" | "incomeDate" | "status" | "recordedById" | "createdAt" | "updatedAt", ExtArgs["result"]["financialIncome"]>;
+export type FinancialIncomeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+};
+export type FinancialIncomeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+};
+export type FinancialIncomeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+};
+export type $FinancialIncomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    name: "FinancialIncome";
+    objects: {
+        recordedBy: Prisma.$UserPayload<ExtArgs>;
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<{
+        id: string;
+        title: string;
+        description: string | null;
+        category: string;
+        amount: runtime.Decimal;
+        incomeDate: Date;
+        status: $Enums.RecordStatus;
+        recordedById: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }, ExtArgs["result"]["financialIncome"]>;
+    composites: {};
+};
+export type FinancialIncomeGetPayload<S extends boolean | null | undefined | FinancialIncomeDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload, S>;
+export type FinancialIncomeCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = Omit<FinancialIncomeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: FinancialIncomeCountAggregateInputType | true;
+};
+export interface FinancialIncomeDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: {
+        types: Prisma.TypeMap<ExtArgs>['model']['FinancialIncome'];
+        meta: {
+            name: 'FinancialIncome';
+        };
+    };
+    /**
+     * Find zero or one FinancialIncome that matches the filter.
+     * @param {FinancialIncomeFindUniqueArgs} args - Arguments to find a FinancialIncome
+     * @example
+     * // Get one FinancialIncome
+     * const financialIncome = await prisma.financialIncome.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FinancialIncomeFindUniqueArgs>(args: Prisma.SelectSubset<T, FinancialIncomeFindUniqueArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one FinancialIncome that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FinancialIncomeFindUniqueOrThrowArgs} args - Arguments to find a FinancialIncome
+     * @example
+     * // Get one FinancialIncome
+     * const financialIncome = await prisma.financialIncome.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FinancialIncomeFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, FinancialIncomeFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first FinancialIncome that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialIncomeFindFirstArgs} args - Arguments to find a FinancialIncome
+     * @example
+     * // Get one FinancialIncome
+     * const financialIncome = await prisma.financialIncome.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FinancialIncomeFindFirstArgs>(args?: Prisma.SelectSubset<T, FinancialIncomeFindFirstArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first FinancialIncome that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialIncomeFindFirstOrThrowArgs} args - Arguments to find a FinancialIncome
+     * @example
+     * // Get one FinancialIncome
+     * const financialIncome = await prisma.financialIncome.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FinancialIncomeFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, FinancialIncomeFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more FinancialIncomes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialIncomeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FinancialIncomes
+     * const financialIncomes = await prisma.financialIncome.findMany()
+     *
+     * // Get first 10 FinancialIncomes
+     * const financialIncomes = await prisma.financialIncome.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const financialIncomeWithIdOnly = await prisma.financialIncome.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends FinancialIncomeFindManyArgs>(args?: Prisma.SelectSubset<T, FinancialIncomeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a FinancialIncome.
+     * @param {FinancialIncomeCreateArgs} args - Arguments to create a FinancialIncome.
+     * @example
+     * // Create one FinancialIncome
+     * const FinancialIncome = await prisma.financialIncome.create({
+     *   data: {
+     *     // ... data to create a FinancialIncome
+     *   }
+     * })
+     *
+     */
+    create<T extends FinancialIncomeCreateArgs>(args: Prisma.SelectSubset<T, FinancialIncomeCreateArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many FinancialIncomes.
+     * @param {FinancialIncomeCreateManyArgs} args - Arguments to create many FinancialIncomes.
+     * @example
+     * // Create many FinancialIncomes
+     * const financialIncome = await prisma.financialIncome.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends FinancialIncomeCreateManyArgs>(args?: Prisma.SelectSubset<T, FinancialIncomeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many FinancialIncomes and returns the data saved in the database.
+     * @param {FinancialIncomeCreateManyAndReturnArgs} args - Arguments to create many FinancialIncomes.
+     * @example
+     * // Create many FinancialIncomes
+     * const financialIncome = await prisma.financialIncome.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many FinancialIncomes and only return the `id`
+     * const financialIncomeWithIdOnly = await prisma.financialIncome.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends FinancialIncomeCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, FinancialIncomeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a FinancialIncome.
+     * @param {FinancialIncomeDeleteArgs} args - Arguments to delete one FinancialIncome.
+     * @example
+     * // Delete one FinancialIncome
+     * const FinancialIncome = await prisma.financialIncome.delete({
+     *   where: {
+     *     // ... filter to delete one FinancialIncome
+     *   }
+     * })
+     *
+     */
+    delete<T extends FinancialIncomeDeleteArgs>(args: Prisma.SelectSubset<T, FinancialIncomeDeleteArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one FinancialIncome.
+     * @param {FinancialIncomeUpdateArgs} args - Arguments to update one FinancialIncome.
+     * @example
+     * // Update one FinancialIncome
+     * const financialIncome = await prisma.financialIncome.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends FinancialIncomeUpdateArgs>(args: Prisma.SelectSubset<T, FinancialIncomeUpdateArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more FinancialIncomes.
+     * @param {FinancialIncomeDeleteManyArgs} args - Arguments to filter FinancialIncomes to delete.
+     * @example
+     * // Delete a few FinancialIncomes
+     * const { count } = await prisma.financialIncome.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends FinancialIncomeDeleteManyArgs>(args?: Prisma.SelectSubset<T, FinancialIncomeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more FinancialIncomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialIncomeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FinancialIncomes
+     * const financialIncome = await prisma.financialIncome.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends FinancialIncomeUpdateManyArgs>(args: Prisma.SelectSubset<T, FinancialIncomeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more FinancialIncomes and returns the data updated in the database.
+     * @param {FinancialIncomeUpdateManyAndReturnArgs} args - Arguments to update many FinancialIncomes.
+     * @example
+     * // Update many FinancialIncomes
+     * const financialIncome = await prisma.financialIncome.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more FinancialIncomes and only return the `id`
+     * const financialIncomeWithIdOnly = await prisma.financialIncome.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends FinancialIncomeUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, FinancialIncomeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one FinancialIncome.
+     * @param {FinancialIncomeUpsertArgs} args - Arguments to update or create a FinancialIncome.
+     * @example
+     * // Update or create a FinancialIncome
+     * const financialIncome = await prisma.financialIncome.upsert({
+     *   create: {
+     *     // ... data to create a FinancialIncome
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FinancialIncome we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FinancialIncomeUpsertArgs>(args: Prisma.SelectSubset<T, FinancialIncomeUpsertArgs<ExtArgs>>): Prisma.Prisma__FinancialIncomeClient<runtime.Types.Result.GetResult<Prisma.$FinancialIncomePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of FinancialIncomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialIncomeCountArgs} args - Arguments to filter FinancialIncomes to count.
+     * @example
+     * // Count the number of FinancialIncomes
+     * const count = await prisma.financialIncome.count({
+     *   where: {
+     *     // ... the filter for the FinancialIncomes we want to count
+     *   }
+     * })
+    **/
+    count<T extends FinancialIncomeCountArgs>(args?: Prisma.Subset<T, FinancialIncomeCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], FinancialIncomeCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a FinancialIncome.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialIncomeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FinancialIncomeAggregateArgs>(args: Prisma.Subset<T, FinancialIncomeAggregateArgs>): Prisma.PrismaPromise<GetFinancialIncomeAggregateType<T>>;
+    /**
+     * Group by FinancialIncome.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialIncomeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<T extends FinancialIncomeGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
+        orderBy: FinancialIncomeGroupByArgs['orderBy'];
+    } : {
+        orderBy?: FinancialIncomeGroupByArgs['orderBy'];
+    }, OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>, ByFields extends Prisma.MaybeTupleToUnion<T['by']>, ByValid extends Prisma.Has<ByFields, OrderFields>, HavingFields extends Prisma.GetHavingFields<T['having']>, HavingValid extends Prisma.Has<ByFields, HavingFields>, ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False, InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.` : HavingValid extends Prisma.False ? {
+        [P in HavingFields]: P extends ByFields ? never : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".` : [
+            Error,
+            'Field ',
+            P,
+            ` in "having" needs to be provided in "by"`
+        ];
+    }[HavingFields] : 'take' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "take", you also need to provide "orderBy"' : 'skip' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields]>(args: Prisma.SubsetIntersection<T, FinancialIncomeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFinancialIncomeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the FinancialIncome model
+     */
+    readonly fields: FinancialIncomeFieldRefs;
+}
+/**
+ * The delegate class that acts as a "Promise-like" for FinancialIncome.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export interface Prisma__FinancialIncomeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    recordedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
+}
+/**
+ * Fields of the FinancialIncome model
+ */
+export interface FinancialIncomeFieldRefs {
+    readonly id: Prisma.FieldRef<"FinancialIncome", 'String'>;
+    readonly title: Prisma.FieldRef<"FinancialIncome", 'String'>;
+    readonly description: Prisma.FieldRef<"FinancialIncome", 'String'>;
+    readonly category: Prisma.FieldRef<"FinancialIncome", 'String'>;
+    readonly amount: Prisma.FieldRef<"FinancialIncome", 'Decimal'>;
+    readonly incomeDate: Prisma.FieldRef<"FinancialIncome", 'DateTime'>;
+    readonly status: Prisma.FieldRef<"FinancialIncome", 'RecordStatus'>;
+    readonly recordedById: Prisma.FieldRef<"FinancialIncome", 'String'>;
+    readonly createdAt: Prisma.FieldRef<"FinancialIncome", 'DateTime'>;
+    readonly updatedAt: Prisma.FieldRef<"FinancialIncome", 'DateTime'>;
+}
+/**
+ * FinancialIncome findUnique
+ */
+export type FinancialIncomeFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * Filter, which FinancialIncome to fetch.
+     */
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+};
+/**
+ * FinancialIncome findUniqueOrThrow
+ */
+export type FinancialIncomeFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * Filter, which FinancialIncome to fetch.
+     */
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+};
+/**
+ * FinancialIncome findFirst
+ */
+export type FinancialIncomeFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * Filter, which FinancialIncome to fetch.
+     */
+    where?: Prisma.FinancialIncomeWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FinancialIncomes to fetch.
+     */
+    orderBy?: Prisma.FinancialIncomeOrderByWithRelationInput | Prisma.FinancialIncomeOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for FinancialIncomes.
+     */
+    cursor?: Prisma.FinancialIncomeWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FinancialIncomes from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FinancialIncomes.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of FinancialIncomes.
+     */
+    distinct?: Prisma.FinancialIncomeScalarFieldEnum | Prisma.FinancialIncomeScalarFieldEnum[];
+};
+/**
+ * FinancialIncome findFirstOrThrow
+ */
+export type FinancialIncomeFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * Filter, which FinancialIncome to fetch.
+     */
+    where?: Prisma.FinancialIncomeWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FinancialIncomes to fetch.
+     */
+    orderBy?: Prisma.FinancialIncomeOrderByWithRelationInput | Prisma.FinancialIncomeOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for FinancialIncomes.
+     */
+    cursor?: Prisma.FinancialIncomeWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FinancialIncomes from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FinancialIncomes.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of FinancialIncomes.
+     */
+    distinct?: Prisma.FinancialIncomeScalarFieldEnum | Prisma.FinancialIncomeScalarFieldEnum[];
+};
+/**
+ * FinancialIncome findMany
+ */
+export type FinancialIncomeFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * Filter, which FinancialIncomes to fetch.
+     */
+    where?: Prisma.FinancialIncomeWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of FinancialIncomes to fetch.
+     */
+    orderBy?: Prisma.FinancialIncomeOrderByWithRelationInput | Prisma.FinancialIncomeOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing FinancialIncomes.
+     */
+    cursor?: Prisma.FinancialIncomeWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` FinancialIncomes from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` FinancialIncomes.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of FinancialIncomes.
+     */
+    distinct?: Prisma.FinancialIncomeScalarFieldEnum | Prisma.FinancialIncomeScalarFieldEnum[];
+};
+/**
+ * FinancialIncome create
+ */
+export type FinancialIncomeCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a FinancialIncome.
+     */
+    data: Prisma.XOR<Prisma.FinancialIncomeCreateInput, Prisma.FinancialIncomeUncheckedCreateInput>;
+};
+/**
+ * FinancialIncome createMany
+ */
+export type FinancialIncomeCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FinancialIncomes.
+     */
+    data: Prisma.FinancialIncomeCreateManyInput | Prisma.FinancialIncomeCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * FinancialIncome createManyAndReturn
+ */
+export type FinancialIncomeCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * The data used to create many FinancialIncomes.
+     */
+    data: Prisma.FinancialIncomeCreateManyInput | Prisma.FinancialIncomeCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeIncludeCreateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * FinancialIncome update
+ */
+export type FinancialIncomeUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a FinancialIncome.
+     */
+    data: Prisma.XOR<Prisma.FinancialIncomeUpdateInput, Prisma.FinancialIncomeUncheckedUpdateInput>;
+    /**
+     * Choose, which FinancialIncome to update.
+     */
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+};
+/**
+ * FinancialIncome updateMany
+ */
+export type FinancialIncomeUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FinancialIncomes.
+     */
+    data: Prisma.XOR<Prisma.FinancialIncomeUpdateManyMutationInput, Prisma.FinancialIncomeUncheckedUpdateManyInput>;
+    /**
+     * Filter which FinancialIncomes to update
+     */
+    where?: Prisma.FinancialIncomeWhereInput;
+    /**
+     * Limit how many FinancialIncomes to update.
+     */
+    limit?: number;
+};
+/**
+ * FinancialIncome updateManyAndReturn
+ */
+export type FinancialIncomeUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * The data used to update FinancialIncomes.
+     */
+    data: Prisma.XOR<Prisma.FinancialIncomeUpdateManyMutationInput, Prisma.FinancialIncomeUncheckedUpdateManyInput>;
+    /**
+     * Filter which FinancialIncomes to update
+     */
+    where?: Prisma.FinancialIncomeWhereInput;
+    /**
+     * Limit how many FinancialIncomes to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * FinancialIncome upsert
+ */
+export type FinancialIncomeUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the FinancialIncome to update in case it exists.
+     */
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+    /**
+     * In case the FinancialIncome found by the `where` argument doesn't exist, create a new FinancialIncome with this data.
+     */
+    create: Prisma.XOR<Prisma.FinancialIncomeCreateInput, Prisma.FinancialIncomeUncheckedCreateInput>;
+    /**
+     * In case the FinancialIncome was found with the provided `where` argument, update it with this data.
+     */
+    update: Prisma.XOR<Prisma.FinancialIncomeUpdateInput, Prisma.FinancialIncomeUncheckedUpdateInput>;
+};
+/**
+ * FinancialIncome delete
+ */
+export type FinancialIncomeDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+    /**
+     * Filter which FinancialIncome to delete.
+     */
+    where: Prisma.FinancialIncomeWhereUniqueInput;
+};
+/**
+ * FinancialIncome deleteMany
+ */
+export type FinancialIncomeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinancialIncomes to delete
+     */
+    where?: Prisma.FinancialIncomeWhereInput;
+    /**
+     * Limit how many FinancialIncomes to delete.
+     */
+    limit?: number;
+};
+/**
+ * FinancialIncome without action
+ */
+export type FinancialIncomeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialIncome
+     */
+    select?: Prisma.FinancialIncomeSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the FinancialIncome
+     */
+    omit?: Prisma.FinancialIncomeOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.FinancialIncomeInclude<ExtArgs> | null;
+};
+//# sourceMappingURL=FinancialIncome.d.ts.map

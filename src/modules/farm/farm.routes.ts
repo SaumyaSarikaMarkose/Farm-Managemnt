@@ -23,10 +23,10 @@ router.get(
 );
 
 // Get initialized farm - Authenticated users
-router.get(
-  "/current",
-  authenticate,
-  FarmController.getCurrentFarm
-);
+// router.get(
+//   "/current",
+//   authenticate,
+//   FarmController.getCurrentFarm
+// );
 
 export default router;

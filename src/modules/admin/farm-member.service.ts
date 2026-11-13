@@ -11,9 +11,7 @@ const ALLOWED_ROLES = [
 ] as const;
 
 async function getFarm() {
-  const farm = await prisma.farm.findUnique({
-    where: { farmCode: FARM_CODE },
-  });
+  const farm = await prisma.farm.findFirst();
 
   if (!farm) {
     throw new Error("Farm has not been initialized.");

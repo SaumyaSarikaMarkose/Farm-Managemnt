@@ -74,27 +74,27 @@ export class FarmController {
     }
   }
 
-  static async getCurrentFarm(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    try {
-      const farm = await FarmService.getCurrentFarm();
+  // static async getCurrentFarm(
+  //   req: Request,
+  //   res: Response,
+  //   next: NextFunction
+  // ) {
+  //   try {
+  //     const farm = await FarmService.getCurrentFarm();
 
-      return res.status(200).json({
-        success: true,
-        data: farm,
-      });
-    } catch (error: any) {
-      if (error.message === "Farm has not been initialized.") {
-        return res.status(404).json({
-          success: false,
-          message: error.message,
-        });
-      }
+  //     return res.status(200).json({
+  //       success: true,
+  //       data: farm,
+  //     });
+  //   } catch (error: any) {
+  //     if (error.message === "Farm has not been initialized.") {
+  //       return res.status(404).json({
+  //         success: false,
+  //         message: error.message,
+  //       });
+  //     }
 
-      next(error);
-    }
-  }
+  //     next(error);
+  //   }
+  // }
 }

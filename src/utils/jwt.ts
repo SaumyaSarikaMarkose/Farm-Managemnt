@@ -6,9 +6,9 @@ export function generateAccessToken(userId: string): string {
     { sub: userId },
     env.JWT_SECRET,
     {
-      expiresIn: env.JWT_EXPIRES_IN as SignOptions["expiresIn"],
+      expiresIn: env.JWT_EXPIRES_IN as any,
       issuer: "cow-farm-api",
       audience: "cow-farm-app",
-    },
+    } as SignOptions,
   );
 }
