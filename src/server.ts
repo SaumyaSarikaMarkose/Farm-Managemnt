@@ -22,11 +22,11 @@ async function startServer() {
 
 startServer();
 
-async function shutdown() {
-  console.log("Shutting down server...");
-  await prisma.$disconnect();
-  process.exit(0);
-}
+// async function shutdown() {
+//   console.log("Shutting down server...");
+//   await prisma.$disconnect();
+//   process.exit(0);
+// }
 
-process.on("SIGINT", shutdown);
-process.on("SIGTERM", shutdown);
+// process.on("SIGINT", shutdown);
+// process.on("SIGTERM", shutdown);
