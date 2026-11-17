@@ -1,4 +1,4 @@
-import { prisma } from '../lib/prisma.js';
+import { prisma } from './src/lib/prisma.js';
 import crypto from 'crypto';
 import util from 'util';
 
@@ -10,37 +10,32 @@ async function hashPassword(password: string): Promise<string> {
   return `${buf.toString('hex')}.${salt}`;
 }
 
-export async function seedDefaultAdmin() {
-  try {
-    const adminEmail = process.env.ADMIN_EMAIL || 'Admin@gmail.com';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@123';
-    const adminName = 'System Administrator';
+async function run() {
+  const email = 'Superadmin@gmail.com';
+  const password = 'Superadmin@123';
+  const name = 'Super Admin';
 
-    const existingAdmin = await prisma.user.findFirst({
-      where: {
-        OR: [
-          { email: adminEmail },
-          { isSuperAdmin: true }
-        ]
-      },
-    });
+  const passwordHash = await hashPassword(password);
 
-    if (!existingAdmin) {
-      const passwordHash = await hashPassword(adminPassword);
-      
-      await prisma.user.create({
-        data: {
-          email: adminEmail,
-          name: adminName,
-          passwordHash,
-          accountStatus: 'APPROVED',
-          isSuperAdmin: true,
-        },
-      });
+  const user = await prisma.user.upsert({
+    where: { email },
+    update: {
+      passwordHash,
+      accountStatus: 'APPROVED',
+      isSuperAdmin: true,
+    },
+    create: {
+      email,
+      name,
+      passwordHash,
+      accountStatus: 'APPROVED',
+      isSuperAdmin: true,
+    },
+  });
 
-      console.log(`Default admin user created successfully (${adminEmail})`);
-    }
-  } catch (error) {
-    console.error('Error seeding default admin:', error);
-  }
+  console.log('Superadmin user successfully set up:', user.email);
 }
+
+run()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());
