@@ -39,18 +39,18 @@ export class FarmMemberController {
     }
   }
 
-  static async getMembers(req: Request, res: Response) {
-    try {
-      const members = await FarmMemberService.getMembers();
+ static async getMembers(req: Request, res: Response) {
+  try {
+    const members = await FarmMemberService.getMembers();
 
-      return res.status(200).json({
-        success: true,
-        data: members,
-      });
-    } catch (error) {
-      return FarmMemberController.handleError(res, error);
-    }
+    return res.status(200).json({
+      success: true,
+      data: members,
+    });
+  } catch (error) {
+    return FarmMemberController.handleError(res, error);
   }
+}
   private static getMembershipId(req: Request): string {
   const membershipId = req.params.membershipId;
 

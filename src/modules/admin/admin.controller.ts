@@ -4,6 +4,7 @@ import { AppError } from "../../utils/app-error.js";
 import {
   getPendingAccounts,
   approveAccount,
+  getAllMembers
 } from "./admin.service.js";
 
 export async function pendingAccountsController(
@@ -57,5 +58,27 @@ export async function approveAccountController(
   return res.status(200).json({
     success: true,
     ...result,
+  });
+}
+
+// Get all approved members
+export async function allMembersController(
+  
+  req: Request,
+  res: Response
+) {
+  console.log("kkkkkkkkkkkkkkkkkkkk")
+  const adminId = req.userId;
+
+  if (!adminId) {
+    throw new AppError(401, "Authentication required.");
+  }
+
+  const members = await getAllMembers(adminId);
+
+  return res.status(200).json({
+    success: true,
+    count: members.length,
+    data: members,
   });
 }

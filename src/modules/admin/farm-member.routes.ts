@@ -27,4 +27,9 @@ router.delete(
   FarmMemberController.removeMember
 );
 
+router.get(
+  "/members",
+  FarmMemberController.getMembers
+)
+
 export default router;

@@ -17,7 +17,10 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: [
+    'http://localhost:4200', 
+    'http://mca-elite.s3-website-ap-southeast-2.amazonaws.com'
+  ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true

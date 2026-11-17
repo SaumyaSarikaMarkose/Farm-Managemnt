@@ -122,11 +122,11 @@ export class FarmMemberService {
 
   // List members
   static async getMembers() {
-    const farm = await getFarm();
+    // const farm = await getFarm();
 
     return prisma.farmMembership.findMany({
       where: {
-        farmId: farm.id,
+       
         status: {
           in: ["ACTIVE", "SUSPENDED"],
         },
@@ -227,3 +227,4 @@ export class FarmMemberService {
     });
   }
 }
+

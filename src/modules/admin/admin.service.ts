@@ -109,3 +109,29 @@ export async function approveAccount(
     }),
   };
 }
+
+// Get all registered members
+
+// Get all approved members
+export async function getAllMembers(adminId: string) {
+  await checkSuperAdmin(adminId);
+
+  return prisma.user.findMany({
+    where: {
+      accountStatus: "APPROVED",
+      isSuperAdmin: false,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      accountStatus: true,
+      createdAt: true,
+      accountReviewedAt: true,
+      accountReviewNote: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
