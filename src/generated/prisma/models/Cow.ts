@@ -27,11 +27,15 @@ export type AggregateCow = {
 }
 
 export type CowAvgAggregateOutputType = {
+  currentWeightKg: runtime.Decimal | null
   purchasePrice: runtime.Decimal | null
+  lactationNumber: number | null
 }
 
 export type CowSumAggregateOutputType = {
+  currentWeightKg: runtime.Decimal | null
   purchasePrice: runtime.Decimal | null
+  lactationNumber: number | null
 }
 
 export type CowMinAggregateOutputType = {
@@ -41,13 +45,18 @@ export type CowMinAggregateOutputType = {
   breed: string | null
   gender: $Enums.CowGender | null
   dateOfBirth: Date | null
+  currentWeightKg: runtime.Decimal | null
+  weightMeasuredAt: Date | null
   acquiredAt: Date | null
   purchasePrice: runtime.Decimal | null
+  damId: string | null
+  sireId: string | null
+  reproductiveStatus: $Enums.CowReproductiveStatus | null
+  lactationNumber: number | null
   status: $Enums.CowStatus | null
   stage: $Enums.CowStage | null
   photoUrl: string | null
   description: string | null
-  farmId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,13 +68,18 @@ export type CowMaxAggregateOutputType = {
   breed: string | null
   gender: $Enums.CowGender | null
   dateOfBirth: Date | null
+  currentWeightKg: runtime.Decimal | null
+  weightMeasuredAt: Date | null
   acquiredAt: Date | null
   purchasePrice: runtime.Decimal | null
+  damId: string | null
+  sireId: string | null
+  reproductiveStatus: $Enums.CowReproductiveStatus | null
+  lactationNumber: number | null
   status: $Enums.CowStatus | null
   stage: $Enums.CowStage | null
   photoUrl: string | null
   description: string | null
-  farmId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -77,13 +91,18 @@ export type CowCountAggregateOutputType = {
   breed: number
   gender: number
   dateOfBirth: number
+  currentWeightKg: number
+  weightMeasuredAt: number
   acquiredAt: number
   purchasePrice: number
+  damId: number
+  sireId: number
+  reproductiveStatus: number
+  lactationNumber: number
   status: number
   stage: number
   photoUrl: number
   description: number
-  farmId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -91,11 +110,15 @@ export type CowCountAggregateOutputType = {
 
 
 export type CowAvgAggregateInputType = {
+  currentWeightKg?: true
   purchasePrice?: true
+  lactationNumber?: true
 }
 
 export type CowSumAggregateInputType = {
+  currentWeightKg?: true
   purchasePrice?: true
+  lactationNumber?: true
 }
 
 export type CowMinAggregateInputType = {
@@ -105,13 +128,18 @@ export type CowMinAggregateInputType = {
   breed?: true
   gender?: true
   dateOfBirth?: true
+  currentWeightKg?: true
+  weightMeasuredAt?: true
   acquiredAt?: true
   purchasePrice?: true
+  damId?: true
+  sireId?: true
+  reproductiveStatus?: true
+  lactationNumber?: true
   status?: true
   stage?: true
   photoUrl?: true
   description?: true
-  farmId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -123,13 +151,18 @@ export type CowMaxAggregateInputType = {
   breed?: true
   gender?: true
   dateOfBirth?: true
+  currentWeightKg?: true
+  weightMeasuredAt?: true
   acquiredAt?: true
   purchasePrice?: true
+  damId?: true
+  sireId?: true
+  reproductiveStatus?: true
+  lactationNumber?: true
   status?: true
   stage?: true
   photoUrl?: true
   description?: true
-  farmId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -141,13 +174,18 @@ export type CowCountAggregateInputType = {
   breed?: true
   gender?: true
   dateOfBirth?: true
+  currentWeightKg?: true
+  weightMeasuredAt?: true
   acquiredAt?: true
   purchasePrice?: true
+  damId?: true
+  sireId?: true
+  reproductiveStatus?: true
+  lactationNumber?: true
   status?: true
   stage?: true
   photoUrl?: true
   description?: true
-  farmId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -246,13 +284,18 @@ export type CowGroupByOutputType = {
   breed: string | null
   gender: $Enums.CowGender
   dateOfBirth: Date | null
+  currentWeightKg: runtime.Decimal | null
+  weightMeasuredAt: Date | null
   acquiredAt: Date | null
   purchasePrice: runtime.Decimal | null
+  damId: string | null
+  sireId: string | null
+  reproductiveStatus: $Enums.CowReproductiveStatus | null
+  lactationNumber: number
   status: $Enums.CowStatus
   stage: $Enums.CowStage
   photoUrl: string | null
   description: string | null
-  farmId: string
   createdAt: Date
   updatedAt: Date
   _count: CowCountAggregateOutputType | null
@@ -287,16 +330,24 @@ export type CowWhereInput = {
   breed?: Prisma.StringNullableFilter<"Cow"> | string | null
   gender?: Prisma.EnumCowGenderFilter<"Cow"> | $Enums.CowGender
   dateOfBirth?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
+  currentWeightKg?: Prisma.DecimalNullableFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
   acquiredAt?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
   purchasePrice?: Prisma.DecimalNullableFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.StringNullableFilter<"Cow"> | string | null
+  sireId?: Prisma.StringNullableFilter<"Cow"> | string | null
+  reproductiveStatus?: Prisma.EnumCowReproductiveStatusNullableFilter<"Cow"> | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFilter<"Cow"> | number
   status?: Prisma.EnumCowStatusFilter<"Cow"> | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFilter<"Cow"> | $Enums.CowStage
   photoUrl?: Prisma.StringNullableFilter<"Cow"> | string | null
   description?: Prisma.StringNullableFilter<"Cow"> | string | null
-  farmId?: Prisma.StringFilter<"Cow"> | string
   createdAt?: Prisma.DateTimeFilter<"Cow"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cow"> | Date | string
-  farm?: Prisma.XOR<Prisma.FarmScalarRelationFilter, Prisma.FarmWhereInput>
+  dam?: Prisma.XOR<Prisma.CowNullableScalarRelationFilter, Prisma.CowWhereInput> | null
+  sire?: Prisma.XOR<Prisma.CowNullableScalarRelationFilter, Prisma.CowWhereInput> | null
+  offspringAsDam?: Prisma.CowListRelationFilter
+  offspringAsSire?: Prisma.CowListRelationFilter
   milkProductions?: Prisma.MilkProductionListRelationFilter
   feedConsumptions?: Prisma.FeedConsumptionListRelationFilter
 }
@@ -308,44 +359,59 @@ export type CowOrderByWithRelationInput = {
   breed?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentWeightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightMeasuredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   acquiredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   purchasePrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  damId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sireId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reproductiveStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  lactationNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  farmId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  farm?: Prisma.FarmOrderByWithRelationInput
+  dam?: Prisma.CowOrderByWithRelationInput
+  sire?: Prisma.CowOrderByWithRelationInput
+  offspringAsDam?: Prisma.CowOrderByRelationAggregateInput
+  offspringAsSire?: Prisma.CowOrderByRelationAggregateInput
   milkProductions?: Prisma.MilkProductionOrderByRelationAggregateInput
   feedConsumptions?: Prisma.FeedConsumptionOrderByRelationAggregateInput
 }
 
 export type CowWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  farmId_tagNumber?: Prisma.CowFarmIdTagNumberCompoundUniqueInput
+  tagNumber?: string
   AND?: Prisma.CowWhereInput | Prisma.CowWhereInput[]
   OR?: Prisma.CowWhereInput[]
   NOT?: Prisma.CowWhereInput | Prisma.CowWhereInput[]
-  tagNumber?: Prisma.StringFilter<"Cow"> | string
   name?: Prisma.StringNullableFilter<"Cow"> | string | null
   breed?: Prisma.StringNullableFilter<"Cow"> | string | null
   gender?: Prisma.EnumCowGenderFilter<"Cow"> | $Enums.CowGender
   dateOfBirth?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
+  currentWeightKg?: Prisma.DecimalNullableFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
   acquiredAt?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
   purchasePrice?: Prisma.DecimalNullableFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.StringNullableFilter<"Cow"> | string | null
+  sireId?: Prisma.StringNullableFilter<"Cow"> | string | null
+  reproductiveStatus?: Prisma.EnumCowReproductiveStatusNullableFilter<"Cow"> | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFilter<"Cow"> | number
   status?: Prisma.EnumCowStatusFilter<"Cow"> | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFilter<"Cow"> | $Enums.CowStage
   photoUrl?: Prisma.StringNullableFilter<"Cow"> | string | null
   description?: Prisma.StringNullableFilter<"Cow"> | string | null
-  farmId?: Prisma.StringFilter<"Cow"> | string
   createdAt?: Prisma.DateTimeFilter<"Cow"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cow"> | Date | string
-  farm?: Prisma.XOR<Prisma.FarmScalarRelationFilter, Prisma.FarmWhereInput>
+  dam?: Prisma.XOR<Prisma.CowNullableScalarRelationFilter, Prisma.CowWhereInput> | null
+  sire?: Prisma.XOR<Prisma.CowNullableScalarRelationFilter, Prisma.CowWhereInput> | null
+  offspringAsDam?: Prisma.CowListRelationFilter
+  offspringAsSire?: Prisma.CowListRelationFilter
   milkProductions?: Prisma.MilkProductionListRelationFilter
   feedConsumptions?: Prisma.FeedConsumptionListRelationFilter
-}, "id" | "farmId_tagNumber">
+}, "id" | "tagNumber">
 
 export type CowOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -354,13 +420,18 @@ export type CowOrderByWithAggregationInput = {
   breed?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentWeightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightMeasuredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   acquiredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   purchasePrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  damId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sireId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reproductiveStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  lactationNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  farmId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CowCountOrderByAggregateInput
@@ -380,13 +451,18 @@ export type CowScalarWhereWithAggregatesInput = {
   breed?: Prisma.StringNullableWithAggregatesFilter<"Cow"> | string | null
   gender?: Prisma.EnumCowGenderWithAggregatesFilter<"Cow"> | $Enums.CowGender
   dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"Cow"> | Date | string | null
+  currentWeightKg?: Prisma.DecimalNullableWithAggregatesFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Cow"> | Date | string | null
   acquiredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Cow"> | Date | string | null
   purchasePrice?: Prisma.DecimalNullableWithAggregatesFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.StringNullableWithAggregatesFilter<"Cow"> | string | null
+  sireId?: Prisma.StringNullableWithAggregatesFilter<"Cow"> | string | null
+  reproductiveStatus?: Prisma.EnumCowReproductiveStatusNullableWithAggregatesFilter<"Cow"> | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntWithAggregatesFilter<"Cow"> | number
   status?: Prisma.EnumCowStatusWithAggregatesFilter<"Cow"> | $Enums.CowStatus
   stage?: Prisma.EnumCowStageWithAggregatesFilter<"Cow"> | $Enums.CowStage
   photoUrl?: Prisma.StringNullableWithAggregatesFilter<"Cow"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Cow"> | string | null
-  farmId?: Prisma.StringWithAggregatesFilter<"Cow"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Cow"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Cow"> | Date | string
 }
@@ -398,15 +474,22 @@ export type CowCreateInput = {
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  farm: Prisma.FarmCreateNestedOneWithoutCowsInput
+  dam?: Prisma.CowCreateNestedOneWithoutOffspringAsDamInput
+  sire?: Prisma.CowCreateNestedOneWithoutOffspringAsSireInput
+  offspringAsDam?: Prisma.CowCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowCreateNestedManyWithoutSireInput
   milkProductions?: Prisma.MilkProductionCreateNestedManyWithoutCowInput
   feedConsumptions?: Prisma.FeedConsumptionCreateNestedManyWithoutCowInput
 }
@@ -418,15 +501,22 @@ export type CowUncheckedCreateInput = {
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
-  farmId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  offspringAsDam?: Prisma.CowUncheckedCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowUncheckedCreateNestedManyWithoutSireInput
   milkProductions?: Prisma.MilkProductionUncheckedCreateNestedManyWithoutCowInput
   feedConsumptions?: Prisma.FeedConsumptionUncheckedCreateNestedManyWithoutCowInput
 }
@@ -438,15 +528,22 @@ export type CowUpdateInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  farm?: Prisma.FarmUpdateOneRequiredWithoutCowsNestedInput
+  dam?: Prisma.CowUpdateOneWithoutOffspringAsDamNestedInput
+  sire?: Prisma.CowUpdateOneWithoutOffspringAsSireNestedInput
+  offspringAsDam?: Prisma.CowUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUpdateManyWithoutSireNestedInput
   milkProductions?: Prisma.MilkProductionUpdateManyWithoutCowNestedInput
   feedConsumptions?: Prisma.FeedConsumptionUpdateManyWithoutCowNestedInput
 }
@@ -458,15 +555,22 @@ export type CowUncheckedUpdateInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  farmId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offspringAsDam?: Prisma.CowUncheckedUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUncheckedUpdateManyWithoutSireNestedInput
   milkProductions?: Prisma.MilkProductionUncheckedUpdateManyWithoutCowNestedInput
   feedConsumptions?: Prisma.FeedConsumptionUncheckedUpdateManyWithoutCowNestedInput
 }
@@ -478,13 +582,18 @@ export type CowCreateManyInput = {
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
-  farmId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -496,8 +605,12 @@ export type CowUpdateManyMutationInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -513,15 +626,25 @@ export type CowUncheckedUpdateManyInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  farmId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CowNullableScalarRelationFilter = {
+  is?: Prisma.CowWhereInput | null
+  isNot?: Prisma.CowWhereInput | null
 }
 
 export type CowListRelationFilter = {
@@ -534,11 +657,6 @@ export type CowOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type CowFarmIdTagNumberCompoundUniqueInput = {
-  farmId: string
-  tagNumber: string
-}
-
 export type CowCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tagNumber?: Prisma.SortOrder
@@ -546,19 +664,26 @@ export type CowCountOrderByAggregateInput = {
   breed?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  currentWeightKg?: Prisma.SortOrder
+  weightMeasuredAt?: Prisma.SortOrder
   acquiredAt?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
+  damId?: Prisma.SortOrder
+  sireId?: Prisma.SortOrder
+  reproductiveStatus?: Prisma.SortOrder
+  lactationNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  farmId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CowAvgOrderByAggregateInput = {
+  currentWeightKg?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
+  lactationNumber?: Prisma.SortOrder
 }
 
 export type CowMaxOrderByAggregateInput = {
@@ -568,13 +693,18 @@ export type CowMaxOrderByAggregateInput = {
   breed?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  currentWeightKg?: Prisma.SortOrder
+  weightMeasuredAt?: Prisma.SortOrder
   acquiredAt?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
+  damId?: Prisma.SortOrder
+  sireId?: Prisma.SortOrder
+  reproductiveStatus?: Prisma.SortOrder
+  lactationNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  farmId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -586,19 +716,26 @@ export type CowMinOrderByAggregateInput = {
   breed?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  currentWeightKg?: Prisma.SortOrder
+  weightMeasuredAt?: Prisma.SortOrder
   acquiredAt?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
+  damId?: Prisma.SortOrder
+  sireId?: Prisma.SortOrder
+  reproductiveStatus?: Prisma.SortOrder
+  lactationNumber?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   photoUrl?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  farmId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CowSumOrderByAggregateInput = {
+  currentWeightKg?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
+  lactationNumber?: Prisma.SortOrder
 }
 
 export type CowScalarRelationFilter = {
@@ -606,51 +743,44 @@ export type CowScalarRelationFilter = {
   isNot?: Prisma.CowWhereInput
 }
 
-export type CowNullableScalarRelationFilter = {
-  is?: Prisma.CowWhereInput | null
-  isNot?: Prisma.CowWhereInput | null
+export type CowCreateNestedOneWithoutOffspringAsDamInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsDamInput, Prisma.CowUncheckedCreateWithoutOffspringAsDamInput>
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutOffspringAsDamInput
+  connect?: Prisma.CowWhereUniqueInput
 }
 
-export type CowCreateNestedManyWithoutFarmInput = {
-  create?: Prisma.XOR<Prisma.CowCreateWithoutFarmInput, Prisma.CowUncheckedCreateWithoutFarmInput> | Prisma.CowCreateWithoutFarmInput[] | Prisma.CowUncheckedCreateWithoutFarmInput[]
-  connectOrCreate?: Prisma.CowCreateOrConnectWithoutFarmInput | Prisma.CowCreateOrConnectWithoutFarmInput[]
-  createMany?: Prisma.CowCreateManyFarmInputEnvelope
+export type CowCreateNestedOneWithoutOffspringAsSireInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsSireInput, Prisma.CowUncheckedCreateWithoutOffspringAsSireInput>
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutOffspringAsSireInput
+  connect?: Prisma.CowWhereUniqueInput
+}
+
+export type CowCreateNestedManyWithoutDamInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutDamInput, Prisma.CowUncheckedCreateWithoutDamInput> | Prisma.CowCreateWithoutDamInput[] | Prisma.CowUncheckedCreateWithoutDamInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutDamInput | Prisma.CowCreateOrConnectWithoutDamInput[]
+  createMany?: Prisma.CowCreateManyDamInputEnvelope
   connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
 }
 
-export type CowUncheckedCreateNestedManyWithoutFarmInput = {
-  create?: Prisma.XOR<Prisma.CowCreateWithoutFarmInput, Prisma.CowUncheckedCreateWithoutFarmInput> | Prisma.CowCreateWithoutFarmInput[] | Prisma.CowUncheckedCreateWithoutFarmInput[]
-  connectOrCreate?: Prisma.CowCreateOrConnectWithoutFarmInput | Prisma.CowCreateOrConnectWithoutFarmInput[]
-  createMany?: Prisma.CowCreateManyFarmInputEnvelope
+export type CowCreateNestedManyWithoutSireInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutSireInput, Prisma.CowUncheckedCreateWithoutSireInput> | Prisma.CowCreateWithoutSireInput[] | Prisma.CowUncheckedCreateWithoutSireInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutSireInput | Prisma.CowCreateOrConnectWithoutSireInput[]
+  createMany?: Prisma.CowCreateManySireInputEnvelope
   connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
 }
 
-export type CowUpdateManyWithoutFarmNestedInput = {
-  create?: Prisma.XOR<Prisma.CowCreateWithoutFarmInput, Prisma.CowUncheckedCreateWithoutFarmInput> | Prisma.CowCreateWithoutFarmInput[] | Prisma.CowUncheckedCreateWithoutFarmInput[]
-  connectOrCreate?: Prisma.CowCreateOrConnectWithoutFarmInput | Prisma.CowCreateOrConnectWithoutFarmInput[]
-  upsert?: Prisma.CowUpsertWithWhereUniqueWithoutFarmInput | Prisma.CowUpsertWithWhereUniqueWithoutFarmInput[]
-  createMany?: Prisma.CowCreateManyFarmInputEnvelope
-  set?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
-  disconnect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
-  delete?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+export type CowUncheckedCreateNestedManyWithoutDamInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutDamInput, Prisma.CowUncheckedCreateWithoutDamInput> | Prisma.CowCreateWithoutDamInput[] | Prisma.CowUncheckedCreateWithoutDamInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutDamInput | Prisma.CowCreateOrConnectWithoutDamInput[]
+  createMany?: Prisma.CowCreateManyDamInputEnvelope
   connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
-  update?: Prisma.CowUpdateWithWhereUniqueWithoutFarmInput | Prisma.CowUpdateWithWhereUniqueWithoutFarmInput[]
-  updateMany?: Prisma.CowUpdateManyWithWhereWithoutFarmInput | Prisma.CowUpdateManyWithWhereWithoutFarmInput[]
-  deleteMany?: Prisma.CowScalarWhereInput | Prisma.CowScalarWhereInput[]
 }
 
-export type CowUncheckedUpdateManyWithoutFarmNestedInput = {
-  create?: Prisma.XOR<Prisma.CowCreateWithoutFarmInput, Prisma.CowUncheckedCreateWithoutFarmInput> | Prisma.CowCreateWithoutFarmInput[] | Prisma.CowUncheckedCreateWithoutFarmInput[]
-  connectOrCreate?: Prisma.CowCreateOrConnectWithoutFarmInput | Prisma.CowCreateOrConnectWithoutFarmInput[]
-  upsert?: Prisma.CowUpsertWithWhereUniqueWithoutFarmInput | Prisma.CowUpsertWithWhereUniqueWithoutFarmInput[]
-  createMany?: Prisma.CowCreateManyFarmInputEnvelope
-  set?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
-  disconnect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
-  delete?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+export type CowUncheckedCreateNestedManyWithoutSireInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutSireInput, Prisma.CowUncheckedCreateWithoutSireInput> | Prisma.CowCreateWithoutSireInput[] | Prisma.CowUncheckedCreateWithoutSireInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutSireInput | Prisma.CowCreateOrConnectWithoutSireInput[]
+  createMany?: Prisma.CowCreateManySireInputEnvelope
   connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
-  update?: Prisma.CowUpdateWithWhereUniqueWithoutFarmInput | Prisma.CowUpdateWithWhereUniqueWithoutFarmInput[]
-  updateMany?: Prisma.CowUpdateManyWithWhereWithoutFarmInput | Prisma.CowUpdateManyWithWhereWithoutFarmInput[]
-  deleteMany?: Prisma.CowScalarWhereInput | Prisma.CowScalarWhereInput[]
 }
 
 export type EnumCowGenderFieldUpdateOperationsInput = {
@@ -665,12 +795,100 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type NullableEnumCowReproductiveStatusFieldUpdateOperationsInput = {
+  set?: $Enums.CowReproductiveStatus | null
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type EnumCowStatusFieldUpdateOperationsInput = {
   set?: $Enums.CowStatus
 }
 
 export type EnumCowStageFieldUpdateOperationsInput = {
   set?: $Enums.CowStage
+}
+
+export type CowUpdateOneWithoutOffspringAsDamNestedInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsDamInput, Prisma.CowUncheckedCreateWithoutOffspringAsDamInput>
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutOffspringAsDamInput
+  upsert?: Prisma.CowUpsertWithoutOffspringAsDamInput
+  disconnect?: Prisma.CowWhereInput | boolean
+  delete?: Prisma.CowWhereInput | boolean
+  connect?: Prisma.CowWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CowUpdateToOneWithWhereWithoutOffspringAsDamInput, Prisma.CowUpdateWithoutOffspringAsDamInput>, Prisma.CowUncheckedUpdateWithoutOffspringAsDamInput>
+}
+
+export type CowUpdateOneWithoutOffspringAsSireNestedInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsSireInput, Prisma.CowUncheckedCreateWithoutOffspringAsSireInput>
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutOffspringAsSireInput
+  upsert?: Prisma.CowUpsertWithoutOffspringAsSireInput
+  disconnect?: Prisma.CowWhereInput | boolean
+  delete?: Prisma.CowWhereInput | boolean
+  connect?: Prisma.CowWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CowUpdateToOneWithWhereWithoutOffspringAsSireInput, Prisma.CowUpdateWithoutOffspringAsSireInput>, Prisma.CowUncheckedUpdateWithoutOffspringAsSireInput>
+}
+
+export type CowUpdateManyWithoutDamNestedInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutDamInput, Prisma.CowUncheckedCreateWithoutDamInput> | Prisma.CowCreateWithoutDamInput[] | Prisma.CowUncheckedCreateWithoutDamInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutDamInput | Prisma.CowCreateOrConnectWithoutDamInput[]
+  upsert?: Prisma.CowUpsertWithWhereUniqueWithoutDamInput | Prisma.CowUpsertWithWhereUniqueWithoutDamInput[]
+  createMany?: Prisma.CowCreateManyDamInputEnvelope
+  set?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  disconnect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  delete?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  update?: Prisma.CowUpdateWithWhereUniqueWithoutDamInput | Prisma.CowUpdateWithWhereUniqueWithoutDamInput[]
+  updateMany?: Prisma.CowUpdateManyWithWhereWithoutDamInput | Prisma.CowUpdateManyWithWhereWithoutDamInput[]
+  deleteMany?: Prisma.CowScalarWhereInput | Prisma.CowScalarWhereInput[]
+}
+
+export type CowUpdateManyWithoutSireNestedInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutSireInput, Prisma.CowUncheckedCreateWithoutSireInput> | Prisma.CowCreateWithoutSireInput[] | Prisma.CowUncheckedCreateWithoutSireInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutSireInput | Prisma.CowCreateOrConnectWithoutSireInput[]
+  upsert?: Prisma.CowUpsertWithWhereUniqueWithoutSireInput | Prisma.CowUpsertWithWhereUniqueWithoutSireInput[]
+  createMany?: Prisma.CowCreateManySireInputEnvelope
+  set?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  disconnect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  delete?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  update?: Prisma.CowUpdateWithWhereUniqueWithoutSireInput | Prisma.CowUpdateWithWhereUniqueWithoutSireInput[]
+  updateMany?: Prisma.CowUpdateManyWithWhereWithoutSireInput | Prisma.CowUpdateManyWithWhereWithoutSireInput[]
+  deleteMany?: Prisma.CowScalarWhereInput | Prisma.CowScalarWhereInput[]
+}
+
+export type CowUncheckedUpdateManyWithoutDamNestedInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutDamInput, Prisma.CowUncheckedCreateWithoutDamInput> | Prisma.CowCreateWithoutDamInput[] | Prisma.CowUncheckedCreateWithoutDamInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutDamInput | Prisma.CowCreateOrConnectWithoutDamInput[]
+  upsert?: Prisma.CowUpsertWithWhereUniqueWithoutDamInput | Prisma.CowUpsertWithWhereUniqueWithoutDamInput[]
+  createMany?: Prisma.CowCreateManyDamInputEnvelope
+  set?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  disconnect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  delete?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  update?: Prisma.CowUpdateWithWhereUniqueWithoutDamInput | Prisma.CowUpdateWithWhereUniqueWithoutDamInput[]
+  updateMany?: Prisma.CowUpdateManyWithWhereWithoutDamInput | Prisma.CowUpdateManyWithWhereWithoutDamInput[]
+  deleteMany?: Prisma.CowScalarWhereInput | Prisma.CowScalarWhereInput[]
+}
+
+export type CowUncheckedUpdateManyWithoutSireNestedInput = {
+  create?: Prisma.XOR<Prisma.CowCreateWithoutSireInput, Prisma.CowUncheckedCreateWithoutSireInput> | Prisma.CowCreateWithoutSireInput[] | Prisma.CowUncheckedCreateWithoutSireInput[]
+  connectOrCreate?: Prisma.CowCreateOrConnectWithoutSireInput | Prisma.CowCreateOrConnectWithoutSireInput[]
+  upsert?: Prisma.CowUpsertWithWhereUniqueWithoutSireInput | Prisma.CowUpsertWithWhereUniqueWithoutSireInput[]
+  createMany?: Prisma.CowCreateManySireInputEnvelope
+  set?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  disconnect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  delete?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  connect?: Prisma.CowWhereUniqueInput | Prisma.CowWhereUniqueInput[]
+  update?: Prisma.CowUpdateWithWhereUniqueWithoutSireInput | Prisma.CowUpdateWithWhereUniqueWithoutSireInput[]
+  updateMany?: Prisma.CowUpdateManyWithWhereWithoutSireInput | Prisma.CowUpdateManyWithWhereWithoutSireInput[]
+  deleteMany?: Prisma.CowScalarWhereInput | Prisma.CowScalarWhereInput[]
 }
 
 export type CowCreateNestedOneWithoutMilkProductionsInput = {
@@ -703,68 +921,384 @@ export type CowUpdateOneWithoutFeedConsumptionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CowUpdateToOneWithWhereWithoutFeedConsumptionsInput, Prisma.CowUpdateWithoutFeedConsumptionsInput>, Prisma.CowUncheckedUpdateWithoutFeedConsumptionsInput>
 }
 
-export type CowCreateWithoutFarmInput = {
+export type CowCreateWithoutOffspringAsDamInput = {
   id?: string
   tagNumber: string
   name?: string | null
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  dam?: Prisma.CowCreateNestedOneWithoutOffspringAsDamInput
+  sire?: Prisma.CowCreateNestedOneWithoutOffspringAsSireInput
+  offspringAsSire?: Prisma.CowCreateNestedManyWithoutSireInput
   milkProductions?: Prisma.MilkProductionCreateNestedManyWithoutCowInput
   feedConsumptions?: Prisma.FeedConsumptionCreateNestedManyWithoutCowInput
 }
 
-export type CowUncheckedCreateWithoutFarmInput = {
+export type CowUncheckedCreateWithoutOffspringAsDamInput = {
   id?: string
   tagNumber: string
   name?: string | null
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  offspringAsSire?: Prisma.CowUncheckedCreateNestedManyWithoutSireInput
   milkProductions?: Prisma.MilkProductionUncheckedCreateNestedManyWithoutCowInput
   feedConsumptions?: Prisma.FeedConsumptionUncheckedCreateNestedManyWithoutCowInput
 }
 
-export type CowCreateOrConnectWithoutFarmInput = {
+export type CowCreateOrConnectWithoutOffspringAsDamInput = {
   where: Prisma.CowWhereUniqueInput
-  create: Prisma.XOR<Prisma.CowCreateWithoutFarmInput, Prisma.CowUncheckedCreateWithoutFarmInput>
+  create: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsDamInput, Prisma.CowUncheckedCreateWithoutOffspringAsDamInput>
 }
 
-export type CowCreateManyFarmInputEnvelope = {
-  data: Prisma.CowCreateManyFarmInput | Prisma.CowCreateManyFarmInput[]
+export type CowCreateWithoutOffspringAsSireInput = {
+  id?: string
+  tagNumber: string
+  name?: string | null
+  breed?: string | null
+  gender?: $Enums.CowGender
+  dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
+  acquiredAt?: Date | string | null
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
+  status?: $Enums.CowStatus
+  stage?: $Enums.CowStage
+  photoUrl?: string | null
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dam?: Prisma.CowCreateNestedOneWithoutOffspringAsDamInput
+  sire?: Prisma.CowCreateNestedOneWithoutOffspringAsSireInput
+  offspringAsDam?: Prisma.CowCreateNestedManyWithoutDamInput
+  milkProductions?: Prisma.MilkProductionCreateNestedManyWithoutCowInput
+  feedConsumptions?: Prisma.FeedConsumptionCreateNestedManyWithoutCowInput
+}
+
+export type CowUncheckedCreateWithoutOffspringAsSireInput = {
+  id?: string
+  tagNumber: string
+  name?: string | null
+  breed?: string | null
+  gender?: $Enums.CowGender
+  dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
+  acquiredAt?: Date | string | null
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
+  status?: $Enums.CowStatus
+  stage?: $Enums.CowStage
+  photoUrl?: string | null
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  offspringAsDam?: Prisma.CowUncheckedCreateNestedManyWithoutDamInput
+  milkProductions?: Prisma.MilkProductionUncheckedCreateNestedManyWithoutCowInput
+  feedConsumptions?: Prisma.FeedConsumptionUncheckedCreateNestedManyWithoutCowInput
+}
+
+export type CowCreateOrConnectWithoutOffspringAsSireInput = {
+  where: Prisma.CowWhereUniqueInput
+  create: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsSireInput, Prisma.CowUncheckedCreateWithoutOffspringAsSireInput>
+}
+
+export type CowCreateWithoutDamInput = {
+  id?: string
+  tagNumber: string
+  name?: string | null
+  breed?: string | null
+  gender?: $Enums.CowGender
+  dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
+  acquiredAt?: Date | string | null
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
+  status?: $Enums.CowStatus
+  stage?: $Enums.CowStage
+  photoUrl?: string | null
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sire?: Prisma.CowCreateNestedOneWithoutOffspringAsSireInput
+  offspringAsDam?: Prisma.CowCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowCreateNestedManyWithoutSireInput
+  milkProductions?: Prisma.MilkProductionCreateNestedManyWithoutCowInput
+  feedConsumptions?: Prisma.FeedConsumptionCreateNestedManyWithoutCowInput
+}
+
+export type CowUncheckedCreateWithoutDamInput = {
+  id?: string
+  tagNumber: string
+  name?: string | null
+  breed?: string | null
+  gender?: $Enums.CowGender
+  dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
+  acquiredAt?: Date | string | null
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
+  status?: $Enums.CowStatus
+  stage?: $Enums.CowStage
+  photoUrl?: string | null
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  offspringAsDam?: Prisma.CowUncheckedCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowUncheckedCreateNestedManyWithoutSireInput
+  milkProductions?: Prisma.MilkProductionUncheckedCreateNestedManyWithoutCowInput
+  feedConsumptions?: Prisma.FeedConsumptionUncheckedCreateNestedManyWithoutCowInput
+}
+
+export type CowCreateOrConnectWithoutDamInput = {
+  where: Prisma.CowWhereUniqueInput
+  create: Prisma.XOR<Prisma.CowCreateWithoutDamInput, Prisma.CowUncheckedCreateWithoutDamInput>
+}
+
+export type CowCreateManyDamInputEnvelope = {
+  data: Prisma.CowCreateManyDamInput | Prisma.CowCreateManyDamInput[]
   skipDuplicates?: boolean
 }
 
-export type CowUpsertWithWhereUniqueWithoutFarmInput = {
-  where: Prisma.CowWhereUniqueInput
-  update: Prisma.XOR<Prisma.CowUpdateWithoutFarmInput, Prisma.CowUncheckedUpdateWithoutFarmInput>
-  create: Prisma.XOR<Prisma.CowCreateWithoutFarmInput, Prisma.CowUncheckedCreateWithoutFarmInput>
+export type CowCreateWithoutSireInput = {
+  id?: string
+  tagNumber: string
+  name?: string | null
+  breed?: string | null
+  gender?: $Enums.CowGender
+  dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
+  acquiredAt?: Date | string | null
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
+  status?: $Enums.CowStatus
+  stage?: $Enums.CowStage
+  photoUrl?: string | null
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dam?: Prisma.CowCreateNestedOneWithoutOffspringAsDamInput
+  offspringAsDam?: Prisma.CowCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowCreateNestedManyWithoutSireInput
+  milkProductions?: Prisma.MilkProductionCreateNestedManyWithoutCowInput
+  feedConsumptions?: Prisma.FeedConsumptionCreateNestedManyWithoutCowInput
 }
 
-export type CowUpdateWithWhereUniqueWithoutFarmInput = {
-  where: Prisma.CowWhereUniqueInput
-  data: Prisma.XOR<Prisma.CowUpdateWithoutFarmInput, Prisma.CowUncheckedUpdateWithoutFarmInput>
+export type CowUncheckedCreateWithoutSireInput = {
+  id?: string
+  tagNumber: string
+  name?: string | null
+  breed?: string | null
+  gender?: $Enums.CowGender
+  dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
+  acquiredAt?: Date | string | null
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
+  status?: $Enums.CowStatus
+  stage?: $Enums.CowStage
+  photoUrl?: string | null
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  offspringAsDam?: Prisma.CowUncheckedCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowUncheckedCreateNestedManyWithoutSireInput
+  milkProductions?: Prisma.MilkProductionUncheckedCreateNestedManyWithoutCowInput
+  feedConsumptions?: Prisma.FeedConsumptionUncheckedCreateNestedManyWithoutCowInput
 }
 
-export type CowUpdateManyWithWhereWithoutFarmInput = {
+export type CowCreateOrConnectWithoutSireInput = {
+  where: Prisma.CowWhereUniqueInput
+  create: Prisma.XOR<Prisma.CowCreateWithoutSireInput, Prisma.CowUncheckedCreateWithoutSireInput>
+}
+
+export type CowCreateManySireInputEnvelope = {
+  data: Prisma.CowCreateManySireInput | Prisma.CowCreateManySireInput[]
+  skipDuplicates?: boolean
+}
+
+export type CowUpsertWithoutOffspringAsDamInput = {
+  update: Prisma.XOR<Prisma.CowUpdateWithoutOffspringAsDamInput, Prisma.CowUncheckedUpdateWithoutOffspringAsDamInput>
+  create: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsDamInput, Prisma.CowUncheckedCreateWithoutOffspringAsDamInput>
+  where?: Prisma.CowWhereInput
+}
+
+export type CowUpdateToOneWithWhereWithoutOffspringAsDamInput = {
+  where?: Prisma.CowWhereInput
+  data: Prisma.XOR<Prisma.CowUpdateWithoutOffspringAsDamInput, Prisma.CowUncheckedUpdateWithoutOffspringAsDamInput>
+}
+
+export type CowUpdateWithoutOffspringAsDamInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
+  stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dam?: Prisma.CowUpdateOneWithoutOffspringAsDamNestedInput
+  sire?: Prisma.CowUpdateOneWithoutOffspringAsSireNestedInput
+  offspringAsSire?: Prisma.CowUpdateManyWithoutSireNestedInput
+  milkProductions?: Prisma.MilkProductionUpdateManyWithoutCowNestedInput
+  feedConsumptions?: Prisma.FeedConsumptionUpdateManyWithoutCowNestedInput
+}
+
+export type CowUncheckedUpdateWithoutOffspringAsDamInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
+  stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offspringAsSire?: Prisma.CowUncheckedUpdateManyWithoutSireNestedInput
+  milkProductions?: Prisma.MilkProductionUncheckedUpdateManyWithoutCowNestedInput
+  feedConsumptions?: Prisma.FeedConsumptionUncheckedUpdateManyWithoutCowNestedInput
+}
+
+export type CowUpsertWithoutOffspringAsSireInput = {
+  update: Prisma.XOR<Prisma.CowUpdateWithoutOffspringAsSireInput, Prisma.CowUncheckedUpdateWithoutOffspringAsSireInput>
+  create: Prisma.XOR<Prisma.CowCreateWithoutOffspringAsSireInput, Prisma.CowUncheckedCreateWithoutOffspringAsSireInput>
+  where?: Prisma.CowWhereInput
+}
+
+export type CowUpdateToOneWithWhereWithoutOffspringAsSireInput = {
+  where?: Prisma.CowWhereInput
+  data: Prisma.XOR<Prisma.CowUpdateWithoutOffspringAsSireInput, Prisma.CowUncheckedUpdateWithoutOffspringAsSireInput>
+}
+
+export type CowUpdateWithoutOffspringAsSireInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
+  stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dam?: Prisma.CowUpdateOneWithoutOffspringAsDamNestedInput
+  sire?: Prisma.CowUpdateOneWithoutOffspringAsSireNestedInput
+  offspringAsDam?: Prisma.CowUpdateManyWithoutDamNestedInput
+  milkProductions?: Prisma.MilkProductionUpdateManyWithoutCowNestedInput
+  feedConsumptions?: Prisma.FeedConsumptionUpdateManyWithoutCowNestedInput
+}
+
+export type CowUncheckedUpdateWithoutOffspringAsSireInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
+  stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offspringAsDam?: Prisma.CowUncheckedUpdateManyWithoutDamNestedInput
+  milkProductions?: Prisma.MilkProductionUncheckedUpdateManyWithoutCowNestedInput
+  feedConsumptions?: Prisma.FeedConsumptionUncheckedUpdateManyWithoutCowNestedInput
+}
+
+export type CowUpsertWithWhereUniqueWithoutDamInput = {
+  where: Prisma.CowWhereUniqueInput
+  update: Prisma.XOR<Prisma.CowUpdateWithoutDamInput, Prisma.CowUncheckedUpdateWithoutDamInput>
+  create: Prisma.XOR<Prisma.CowCreateWithoutDamInput, Prisma.CowUncheckedCreateWithoutDamInput>
+}
+
+export type CowUpdateWithWhereUniqueWithoutDamInput = {
+  where: Prisma.CowWhereUniqueInput
+  data: Prisma.XOR<Prisma.CowUpdateWithoutDamInput, Prisma.CowUncheckedUpdateWithoutDamInput>
+}
+
+export type CowUpdateManyWithWhereWithoutDamInput = {
   where: Prisma.CowScalarWhereInput
-  data: Prisma.XOR<Prisma.CowUpdateManyMutationInput, Prisma.CowUncheckedUpdateManyWithoutFarmInput>
+  data: Prisma.XOR<Prisma.CowUpdateManyMutationInput, Prisma.CowUncheckedUpdateManyWithoutDamInput>
 }
 
 export type CowScalarWhereInput = {
@@ -777,15 +1311,36 @@ export type CowScalarWhereInput = {
   breed?: Prisma.StringNullableFilter<"Cow"> | string | null
   gender?: Prisma.EnumCowGenderFilter<"Cow"> | $Enums.CowGender
   dateOfBirth?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
+  currentWeightKg?: Prisma.DecimalNullableFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
   acquiredAt?: Prisma.DateTimeNullableFilter<"Cow"> | Date | string | null
   purchasePrice?: Prisma.DecimalNullableFilter<"Cow"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.StringNullableFilter<"Cow"> | string | null
+  sireId?: Prisma.StringNullableFilter<"Cow"> | string | null
+  reproductiveStatus?: Prisma.EnumCowReproductiveStatusNullableFilter<"Cow"> | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFilter<"Cow"> | number
   status?: Prisma.EnumCowStatusFilter<"Cow"> | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFilter<"Cow"> | $Enums.CowStage
   photoUrl?: Prisma.StringNullableFilter<"Cow"> | string | null
   description?: Prisma.StringNullableFilter<"Cow"> | string | null
-  farmId?: Prisma.StringFilter<"Cow"> | string
   createdAt?: Prisma.DateTimeFilter<"Cow"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cow"> | Date | string
+}
+
+export type CowUpsertWithWhereUniqueWithoutSireInput = {
+  where: Prisma.CowWhereUniqueInput
+  update: Prisma.XOR<Prisma.CowUpdateWithoutSireInput, Prisma.CowUncheckedUpdateWithoutSireInput>
+  create: Prisma.XOR<Prisma.CowCreateWithoutSireInput, Prisma.CowUncheckedCreateWithoutSireInput>
+}
+
+export type CowUpdateWithWhereUniqueWithoutSireInput = {
+  where: Prisma.CowWhereUniqueInput
+  data: Prisma.XOR<Prisma.CowUpdateWithoutSireInput, Prisma.CowUncheckedUpdateWithoutSireInput>
+}
+
+export type CowUpdateManyWithWhereWithoutSireInput = {
+  where: Prisma.CowScalarWhereInput
+  data: Prisma.XOR<Prisma.CowUpdateManyMutationInput, Prisma.CowUncheckedUpdateManyWithoutSireInput>
 }
 
 export type CowCreateWithoutMilkProductionsInput = {
@@ -795,15 +1350,22 @@ export type CowCreateWithoutMilkProductionsInput = {
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  farm: Prisma.FarmCreateNestedOneWithoutCowsInput
+  dam?: Prisma.CowCreateNestedOneWithoutOffspringAsDamInput
+  sire?: Prisma.CowCreateNestedOneWithoutOffspringAsSireInput
+  offspringAsDam?: Prisma.CowCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowCreateNestedManyWithoutSireInput
   feedConsumptions?: Prisma.FeedConsumptionCreateNestedManyWithoutCowInput
 }
 
@@ -814,15 +1376,22 @@ export type CowUncheckedCreateWithoutMilkProductionsInput = {
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
-  farmId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  offspringAsDam?: Prisma.CowUncheckedCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowUncheckedCreateNestedManyWithoutSireInput
   feedConsumptions?: Prisma.FeedConsumptionUncheckedCreateNestedManyWithoutCowInput
 }
 
@@ -849,15 +1418,22 @@ export type CowUpdateWithoutMilkProductionsInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  farm?: Prisma.FarmUpdateOneRequiredWithoutCowsNestedInput
+  dam?: Prisma.CowUpdateOneWithoutOffspringAsDamNestedInput
+  sire?: Prisma.CowUpdateOneWithoutOffspringAsSireNestedInput
+  offspringAsDam?: Prisma.CowUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUpdateManyWithoutSireNestedInput
   feedConsumptions?: Prisma.FeedConsumptionUpdateManyWithoutCowNestedInput
 }
 
@@ -868,15 +1444,22 @@ export type CowUncheckedUpdateWithoutMilkProductionsInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  farmId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offspringAsDam?: Prisma.CowUncheckedUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUncheckedUpdateManyWithoutSireNestedInput
   feedConsumptions?: Prisma.FeedConsumptionUncheckedUpdateManyWithoutCowNestedInput
 }
 
@@ -887,15 +1470,22 @@ export type CowCreateWithoutFeedConsumptionsInput = {
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  farm: Prisma.FarmCreateNestedOneWithoutCowsInput
+  dam?: Prisma.CowCreateNestedOneWithoutOffspringAsDamInput
+  sire?: Prisma.CowCreateNestedOneWithoutOffspringAsSireInput
+  offspringAsDam?: Prisma.CowCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowCreateNestedManyWithoutSireInput
   milkProductions?: Prisma.MilkProductionCreateNestedManyWithoutCowInput
 }
 
@@ -906,15 +1496,22 @@ export type CowUncheckedCreateWithoutFeedConsumptionsInput = {
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
-  farmId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  offspringAsDam?: Prisma.CowUncheckedCreateNestedManyWithoutDamInput
+  offspringAsSire?: Prisma.CowUncheckedCreateNestedManyWithoutSireInput
   milkProductions?: Prisma.MilkProductionUncheckedCreateNestedManyWithoutCowInput
 }
 
@@ -941,15 +1538,22 @@ export type CowUpdateWithoutFeedConsumptionsInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  farm?: Prisma.FarmUpdateOneRequiredWithoutCowsNestedInput
+  dam?: Prisma.CowUpdateOneWithoutOffspringAsDamNestedInput
+  sire?: Prisma.CowUpdateOneWithoutOffspringAsSireNestedInput
+  offspringAsDam?: Prisma.CowUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUpdateManyWithoutSireNestedInput
   milkProductions?: Prisma.MilkProductionUpdateManyWithoutCowNestedInput
 }
 
@@ -960,82 +1564,209 @@ export type CowUncheckedUpdateWithoutFeedConsumptionsInput = {
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  farmId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offspringAsDam?: Prisma.CowUncheckedUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUncheckedUpdateManyWithoutSireNestedInput
   milkProductions?: Prisma.MilkProductionUncheckedUpdateManyWithoutCowNestedInput
 }
 
-export type CowCreateManyFarmInput = {
+export type CowCreateManyDamInput = {
   id?: string
   tagNumber: string
   name?: string | null
   breed?: string | null
   gender?: $Enums.CowGender
   dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
   acquiredAt?: Date | string | null
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sireId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
   status?: $Enums.CowStatus
-  stage: $Enums.CowStage
+  stage?: $Enums.CowStage
   photoUrl?: string | null
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type CowUpdateWithoutFarmInput = {
+export type CowCreateManySireInput = {
+  id?: string
+  tagNumber: string
+  name?: string | null
+  breed?: string | null
+  gender?: $Enums.CowGender
+  dateOfBirth?: Date | string | null
+  currentWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Date | string | null
+  acquiredAt?: Date | string | null
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: string | null
+  reproductiveStatus?: $Enums.CowReproductiveStatus | null
+  lactationNumber?: number
+  status?: $Enums.CowStatus
+  stage?: $Enums.CowStage
+  photoUrl?: string | null
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CowUpdateWithoutDamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sire?: Prisma.CowUpdateOneWithoutOffspringAsSireNestedInput
+  offspringAsDam?: Prisma.CowUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUpdateManyWithoutSireNestedInput
   milkProductions?: Prisma.MilkProductionUpdateManyWithoutCowNestedInput
   feedConsumptions?: Prisma.FeedConsumptionUpdateManyWithoutCowNestedInput
 }
 
-export type CowUncheckedUpdateWithoutFarmInput = {
+export type CowUncheckedUpdateWithoutDamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offspringAsDam?: Prisma.CowUncheckedUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUncheckedUpdateManyWithoutSireNestedInput
   milkProductions?: Prisma.MilkProductionUncheckedUpdateManyWithoutCowNestedInput
   feedConsumptions?: Prisma.FeedConsumptionUncheckedUpdateManyWithoutCowNestedInput
 }
 
-export type CowUncheckedUpdateManyWithoutFarmInput = {
+export type CowUncheckedUpdateManyWithoutDamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sireId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
+  stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CowUpdateWithoutSireInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
+  stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dam?: Prisma.CowUpdateOneWithoutOffspringAsDamNestedInput
+  offspringAsDam?: Prisma.CowUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUpdateManyWithoutSireNestedInput
+  milkProductions?: Prisma.MilkProductionUpdateManyWithoutCowNestedInput
+  feedConsumptions?: Prisma.FeedConsumptionUpdateManyWithoutCowNestedInput
+}
+
+export type CowUncheckedUpdateWithoutSireInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
+  stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offspringAsDam?: Prisma.CowUncheckedUpdateManyWithoutDamNestedInput
+  offspringAsSire?: Prisma.CowUncheckedUpdateManyWithoutSireNestedInput
+  milkProductions?: Prisma.MilkProductionUncheckedUpdateManyWithoutCowNestedInput
+  feedConsumptions?: Prisma.FeedConsumptionUncheckedUpdateManyWithoutCowNestedInput
+}
+
+export type CowUncheckedUpdateManyWithoutSireInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tagNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumCowGenderFieldUpdateOperationsInput | $Enums.CowGender
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightMeasuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acquiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchasePrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  damId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reproductiveStatus?: Prisma.NullableEnumCowReproductiveStatusFieldUpdateOperationsInput | $Enums.CowReproductiveStatus | null
+  lactationNumber?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCowStatusFieldUpdateOperationsInput | $Enums.CowStatus
   stage?: Prisma.EnumCowStageFieldUpdateOperationsInput | $Enums.CowStage
   photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1050,11 +1781,15 @@ export type CowUncheckedUpdateManyWithoutFarmInput = {
  */
 
 export type CowCountOutputType = {
+  offspringAsDam: number
+  offspringAsSire: number
   milkProductions: number
   feedConsumptions: number
 }
 
 export type CowCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  offspringAsDam?: boolean | CowCountOutputTypeCountOffspringAsDamArgs
+  offspringAsSire?: boolean | CowCountOutputTypeCountOffspringAsSireArgs
   milkProductions?: boolean | CowCountOutputTypeCountMilkProductionsArgs
   feedConsumptions?: boolean | CowCountOutputTypeCountFeedConsumptionsArgs
 }
@@ -1067,6 +1802,20 @@ export type CowCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensio
    * Select specific fields to fetch from the CowCountOutputType
    */
   select?: Prisma.CowCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CowCountOutputType without action
+ */
+export type CowCountOutputTypeCountOffspringAsDamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CowWhereInput
+}
+
+/**
+ * CowCountOutputType without action
+ */
+export type CowCountOutputTypeCountOffspringAsSireArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CowWhereInput
 }
 
 /**
@@ -1091,16 +1840,24 @@ export type CowSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   breed?: boolean
   gender?: boolean
   dateOfBirth?: boolean
+  currentWeightKg?: boolean
+  weightMeasuredAt?: boolean
   acquiredAt?: boolean
   purchasePrice?: boolean
+  damId?: boolean
+  sireId?: boolean
+  reproductiveStatus?: boolean
+  lactationNumber?: boolean
   status?: boolean
   stage?: boolean
   photoUrl?: boolean
   description?: boolean
-  farmId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  dam?: boolean | Prisma.Cow$damArgs<ExtArgs>
+  sire?: boolean | Prisma.Cow$sireArgs<ExtArgs>
+  offspringAsDam?: boolean | Prisma.Cow$offspringAsDamArgs<ExtArgs>
+  offspringAsSire?: boolean | Prisma.Cow$offspringAsSireArgs<ExtArgs>
   milkProductions?: boolean | Prisma.Cow$milkProductionsArgs<ExtArgs>
   feedConsumptions?: boolean | Prisma.Cow$feedConsumptionsArgs<ExtArgs>
   _count?: boolean | Prisma.CowCountOutputTypeDefaultArgs<ExtArgs>
@@ -1113,16 +1870,22 @@ export type CowSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   breed?: boolean
   gender?: boolean
   dateOfBirth?: boolean
+  currentWeightKg?: boolean
+  weightMeasuredAt?: boolean
   acquiredAt?: boolean
   purchasePrice?: boolean
+  damId?: boolean
+  sireId?: boolean
+  reproductiveStatus?: boolean
+  lactationNumber?: boolean
   status?: boolean
   stage?: boolean
   photoUrl?: boolean
   description?: boolean
-  farmId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  dam?: boolean | Prisma.Cow$damArgs<ExtArgs>
+  sire?: boolean | Prisma.Cow$sireArgs<ExtArgs>
 }, ExtArgs["result"]["cow"]>
 
 export type CowSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1132,16 +1895,22 @@ export type CowSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   breed?: boolean
   gender?: boolean
   dateOfBirth?: boolean
+  currentWeightKg?: boolean
+  weightMeasuredAt?: boolean
   acquiredAt?: boolean
   purchasePrice?: boolean
+  damId?: boolean
+  sireId?: boolean
+  reproductiveStatus?: boolean
+  lactationNumber?: boolean
   status?: boolean
   stage?: boolean
   photoUrl?: boolean
   description?: boolean
-  farmId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  dam?: boolean | Prisma.Cow$damArgs<ExtArgs>
+  sire?: boolean | Prisma.Cow$sireArgs<ExtArgs>
 }, ExtArgs["result"]["cow"]>
 
 export type CowSelectScalar = {
@@ -1151,35 +1920,48 @@ export type CowSelectScalar = {
   breed?: boolean
   gender?: boolean
   dateOfBirth?: boolean
+  currentWeightKg?: boolean
+  weightMeasuredAt?: boolean
   acquiredAt?: boolean
   purchasePrice?: boolean
+  damId?: boolean
+  sireId?: boolean
+  reproductiveStatus?: boolean
+  lactationNumber?: boolean
   status?: boolean
   stage?: boolean
   photoUrl?: boolean
   description?: boolean
-  farmId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CowOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tagNumber" | "name" | "breed" | "gender" | "dateOfBirth" | "acquiredAt" | "purchasePrice" | "status" | "stage" | "photoUrl" | "description" | "farmId" | "createdAt" | "updatedAt", ExtArgs["result"]["cow"]>
+export type CowOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tagNumber" | "name" | "breed" | "gender" | "dateOfBirth" | "currentWeightKg" | "weightMeasuredAt" | "acquiredAt" | "purchasePrice" | "damId" | "sireId" | "reproductiveStatus" | "lactationNumber" | "status" | "stage" | "photoUrl" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["cow"]>
 export type CowInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  dam?: boolean | Prisma.Cow$damArgs<ExtArgs>
+  sire?: boolean | Prisma.Cow$sireArgs<ExtArgs>
+  offspringAsDam?: boolean | Prisma.Cow$offspringAsDamArgs<ExtArgs>
+  offspringAsSire?: boolean | Prisma.Cow$offspringAsSireArgs<ExtArgs>
   milkProductions?: boolean | Prisma.Cow$milkProductionsArgs<ExtArgs>
   feedConsumptions?: boolean | Prisma.Cow$feedConsumptionsArgs<ExtArgs>
   _count?: boolean | Prisma.CowCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CowIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  dam?: boolean | Prisma.Cow$damArgs<ExtArgs>
+  sire?: boolean | Prisma.Cow$sireArgs<ExtArgs>
 }
 export type CowIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  dam?: boolean | Prisma.Cow$damArgs<ExtArgs>
+  sire?: boolean | Prisma.Cow$sireArgs<ExtArgs>
 }
 
 export type $CowPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Cow"
   objects: {
-    farm: Prisma.$FarmPayload<ExtArgs>
+    dam: Prisma.$CowPayload<ExtArgs> | null
+    sire: Prisma.$CowPayload<ExtArgs> | null
+    offspringAsDam: Prisma.$CowPayload<ExtArgs>[]
+    offspringAsSire: Prisma.$CowPayload<ExtArgs>[]
     milkProductions: Prisma.$MilkProductionPayload<ExtArgs>[]
     feedConsumptions: Prisma.$FeedConsumptionPayload<ExtArgs>[]
   }
@@ -1190,13 +1972,18 @@ export type $CowPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     breed: string | null
     gender: $Enums.CowGender
     dateOfBirth: Date | null
+    currentWeightKg: runtime.Decimal | null
+    weightMeasuredAt: Date | null
     acquiredAt: Date | null
     purchasePrice: runtime.Decimal | null
+    damId: string | null
+    sireId: string | null
+    reproductiveStatus: $Enums.CowReproductiveStatus | null
+    lactationNumber: number
     status: $Enums.CowStatus
     stage: $Enums.CowStage
     photoUrl: string | null
     description: string | null
-    farmId: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["cow"]>
@@ -1593,7 +2380,10 @@ readonly fields: CowFieldRefs;
  */
 export interface Prisma__CowClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  farm<T extends Prisma.FarmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FarmDefaultArgs<ExtArgs>>): Prisma.Prisma__FarmClient<runtime.Types.Result.GetResult<Prisma.$FarmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  dam<T extends Prisma.Cow$damArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cow$damArgs<ExtArgs>>): Prisma.Prisma__CowClient<runtime.Types.Result.GetResult<Prisma.$CowPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  sire<T extends Prisma.Cow$sireArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cow$sireArgs<ExtArgs>>): Prisma.Prisma__CowClient<runtime.Types.Result.GetResult<Prisma.$CowPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  offspringAsDam<T extends Prisma.Cow$offspringAsDamArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cow$offspringAsDamArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  offspringAsSire<T extends Prisma.Cow$offspringAsSireArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cow$offspringAsSireArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   milkProductions<T extends Prisma.Cow$milkProductionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cow$milkProductionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MilkProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   feedConsumptions<T extends Prisma.Cow$feedConsumptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cow$feedConsumptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedConsumptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1631,13 +2421,18 @@ export interface CowFieldRefs {
   readonly breed: Prisma.FieldRef<"Cow", 'String'>
   readonly gender: Prisma.FieldRef<"Cow", 'CowGender'>
   readonly dateOfBirth: Prisma.FieldRef<"Cow", 'DateTime'>
+  readonly currentWeightKg: Prisma.FieldRef<"Cow", 'Decimal'>
+  readonly weightMeasuredAt: Prisma.FieldRef<"Cow", 'DateTime'>
   readonly acquiredAt: Prisma.FieldRef<"Cow", 'DateTime'>
   readonly purchasePrice: Prisma.FieldRef<"Cow", 'Decimal'>
+  readonly damId: Prisma.FieldRef<"Cow", 'String'>
+  readonly sireId: Prisma.FieldRef<"Cow", 'String'>
+  readonly reproductiveStatus: Prisma.FieldRef<"Cow", 'CowReproductiveStatus'>
+  readonly lactationNumber: Prisma.FieldRef<"Cow", 'Int'>
   readonly status: Prisma.FieldRef<"Cow", 'CowStatus'>
   readonly stage: Prisma.FieldRef<"Cow", 'CowStage'>
   readonly photoUrl: Prisma.FieldRef<"Cow", 'String'>
   readonly description: Prisma.FieldRef<"Cow", 'String'>
-  readonly farmId: Prisma.FieldRef<"Cow", 'String'>
   readonly createdAt: Prisma.FieldRef<"Cow", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Cow", 'DateTime'>
 }
@@ -2038,6 +2833,92 @@ export type CowDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Limit how many Cows to delete.
    */
   limit?: number
+}
+
+/**
+ * Cow.dam
+ */
+export type Cow$damArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cow
+   */
+  select?: Prisma.CowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cow
+   */
+  omit?: Prisma.CowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CowInclude<ExtArgs> | null
+  where?: Prisma.CowWhereInput
+}
+
+/**
+ * Cow.sire
+ */
+export type Cow$sireArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cow
+   */
+  select?: Prisma.CowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cow
+   */
+  omit?: Prisma.CowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CowInclude<ExtArgs> | null
+  where?: Prisma.CowWhereInput
+}
+
+/**
+ * Cow.offspringAsDam
+ */
+export type Cow$offspringAsDamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cow
+   */
+  select?: Prisma.CowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cow
+   */
+  omit?: Prisma.CowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CowInclude<ExtArgs> | null
+  where?: Prisma.CowWhereInput
+  orderBy?: Prisma.CowOrderByWithRelationInput | Prisma.CowOrderByWithRelationInput[]
+  cursor?: Prisma.CowWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CowScalarFieldEnum | Prisma.CowScalarFieldEnum[]
+}
+
+/**
+ * Cow.offspringAsSire
+ */
+export type Cow$offspringAsSireArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cow
+   */
+  select?: Prisma.CowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cow
+   */
+  omit?: Prisma.CowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CowInclude<ExtArgs> | null
+  where?: Prisma.CowWhereInput
+  orderBy?: Prisma.CowOrderByWithRelationInput | Prisma.CowOrderByWithRelationInput[]
+  cursor?: Prisma.CowWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CowScalarFieldEnum | Prisma.CowScalarFieldEnum[]
 }
 
 /**

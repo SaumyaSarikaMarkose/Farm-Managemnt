@@ -1,177 +1,369 @@
-import type  { Request, Response } from "express";
-import { CowService } from "./cow.service.js";
+
+import type { Request, Response, NextFunction } from "express";
+
 import {
-  validateCreateCow,
-  validateUpdateCow,
-  validateCowStatus,
+  CowStatus,
+  CowStage,
+  CowReproductiveStatus,
+} from "../../generated/prisma/client.js";
+
+import { cowService } from "./cow.service.js";
+
+import {
+  validateCowPayload,
+  validateWeightPayload,
 } from "./cow.validation.js";
 
-interface AuthRequest extends Request {
-  userId?: string;
+// ---------------------------------------------
+// Helper functions
+// ---------------------------------------------
+
+function createHttpError(
+  message: string,
+  statusCode: number,
+): Error & { statusCode: number } {
+  const error = new Error(message) as Error & {
+    statusCode: number;
+  };
+
+  error.statusCode = statusCode;
+
+  return error;
 }
 
-function getUserId(req: AuthRequest): string {
-  if (!req.userId) {
-    throw new Error("Authentication required.");
+// Get authenticated user ID
+function getUserId(req: Request): string {
+  const userId = req.userId;
+
+  if (typeof userId !== "string" || !userId.trim()) {
+    throw createHttpError("Authentication required", 401);
   }
 
-  return req.userId;
+  return userId;
 }
+
+// Get cow ID safely (Express 5 compatible)
 function getCowId(req: Request): string {
-  const cowId = req.params.cowId;
+  const id = req.params.id;
 
-  if (typeof cowId !== "string" || !cowId.trim()) {
-    throw new Error("Invalid cow ID.");
+  if (typeof id !== "string" || !id.trim()) {
+    throw createHttpError("Cow ID is required", 400);
   }
 
-  return cowId;
+  return id.trim();
 }
 
-function sendError(res: Response, error: unknown) {
-  const message =
-    error instanceof Error ? error.message : "Something went wrong.";
+// Validate query filters
+function validateFilter<T extends string>(
+  value: unknown,
+  allowed: readonly T[],
+  field: string,
+): T | undefined {
+  if (
+    value === undefined ||
+    value === "" ||
+    value === "ALL"
+  ) {
+    return undefined;
+  }
 
-  const status =
-    message === "Cow not found." ? 404 :
-    message === "Authentication required." ? 401 :
-    message.includes("permission") ||
-    message.includes("approved") ||
-    message.includes("active member") ? 403 :
-    400;
+  if (
+    typeof value !== "string" ||
+    !allowed.includes(value as T)
+  ) {
+    throw createHttpError(`Invalid ${field}`, 400);
+  }
 
-  return res.status(status).json({
-    success: false,
-    message,
-  });
+  return value as T;
 }
 
-export class CowController {
-  static async createCow(req: Request, res: Response) {
-    try {
-      const authReq = req as AuthRequest;
-      const errors = validateCreateCow(req.body);
-
-      if (errors.length) {
-        return res.status(400).json({
-          success: false,
-          message: "Validation failed.",
-          errors,
-        });
-      }
-
-      const cow = await CowService.createCow(
-        getUserId(authReq),
-        req.body
-      );
-
-      return res.status(201).json({
-        success: true,
-        message: "Cow created successfully.",
-        data: cow,
-      });
-    } catch (error) {
-      return sendError(res, error);
-    }
+// Validate pagination numbers
+function getPositiveInteger(
+  value: unknown,
+  defaultValue: number,
+  field: string,
+  max?: number,
+): number {
+  if (value === undefined) {
+    return defaultValue;
   }
 
-  static async getCows(req: Request, res: Response) {
-    try {
-      const authReq = req as AuthRequest;
-
-      const result = await CowService.getCows(
-        getUserId(authReq),
-        {
-          search: req.query.search as string,
-          status: req.query.status as string,
-          stage: req.query.stage as string,
-          gender: req.query.gender as string,
-          page: Number(req.query.page) || 1,
-          limit: Number(req.query.limit) || 20,
-        }
-      );
-
-      return res.status(200).json({
-        success: true,
-        data: result.cows,
-        pagination: result.pagination,
-      });
-    } catch (error) {
-      return sendError(res, error);
-    }
+  if (
+    typeof value !== "string" ||
+    !/^\d+$/.test(value)
+  ) {
+    throw createHttpError(`Invalid ${field}`, 400);
   }
 
-  static async getCowById(req: Request, res: Response) {
-    try {
-      const authReq = req as AuthRequest;
+  const parsed = Number(value);
 
-      const cow = await CowService.getCowById(
-        getUserId(authReq),
-        getCowId(req)
-      );
-
-      return res.status(200).json({
-        success: true,
-        data: cow,
-      });
-    } catch (error) {
-      return sendError(res, error);
-    }
+  if (
+    !Number.isSafeInteger(parsed) ||
+    parsed < 1 ||
+    (max !== undefined && parsed > max)
+  ) {
+    throw createHttpError(`Invalid ${field}`, 400);
   }
 
-  static async updateCow(req: Request, res: Response) {
-    try {
-      const authReq = req as AuthRequest;
-      const errors = validateUpdateCow(req.body);
-
-      if (errors.length) {
-        return res.status(400).json({
-          success: false,
-          message: "Validation failed.",
-          errors,
-        });
-      }
-
-      const cow = await CowService.updateCow(
-        getUserId(authReq),
-        getCowId(req),
-        req.body
-      );
-
-      return res.status(200).json({
-        success: true,
-        message: "Cow updated successfully.",
-        data: cow,
-      });
-    } catch (error) {
-      return sendError(res, error);
-    }
-  }
-
-  static async updateCowStatus(req: Request, res: Response) {
-    try {
-      const authReq = req as AuthRequest;
-      const { status } = req.body;
-
-      if (!validateCowStatus(status)) {
-        return res.status(400).json({
-          success: false,
-          message: "Invalid cow status.",
-        });
-      }
-
-      const cow = await CowService.updateCowStatus(
-        getUserId(authReq),
-        getCowId(req),
-        status
-      );
-
-      return res.status(200).json({
-        success: true,
-        message: "Cow status updated successfully.",
-        data: cow,
-      });
-    } catch (error) {
-      return sendError(res, error);
-    }
-  }
+  return parsed;
 }
+
+// ---------------------------------------------
+// Cow Controller
+// ---------------------------------------------
+
+export const cowController = {
+
+  /**
+   * POST /cows
+   * Create a new cow
+   */
+  createCow: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const userId = getUserId(req);
+      const payload = validateCowPayload(req.body);
+
+      const cow = await cowService.createCow(
+        userId,
+        payload,
+      );
+
+      res.status(201).json({
+        success: true,
+        message: "Cow registered successfully",
+        data: cow,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * GET /cows
+   * Get all cows with pagination and filters
+   */
+  getAllCows: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const userId = getUserId(req);
+
+      const page = getPositiveInteger(
+        req.query.page,
+        1,
+        "page",
+      );
+
+      const limit = getPositiveInteger(
+        req.query.limit,
+        10,
+        "limit",
+        100,
+      );
+
+      const search =
+        typeof req.query.search === "string"
+          ? req.query.search.trim()
+          : undefined;
+
+      const status = validateFilter(
+        req.query.status,
+        Object.values(CowStatus),
+        "status",
+      );
+
+      const stage = validateFilter(
+        req.query.stage,
+        Object.values(CowStage),
+        "stage",
+      );
+
+      const reproductiveStatus = validateFilter(
+        req.query.reproductiveStatus,
+        Object.values(CowReproductiveStatus),
+        "reproductive status",
+      );
+
+      // Build filters without explicitly assigning undefined.
+      const filters = {
+        page,
+        limit,
+        ...(search !== undefined && { search }),
+        ...(status !== undefined && { status }),
+        ...(stage !== undefined && { stage }),
+        ...(reproductiveStatus !== undefined && {
+          reproductiveStatus,
+        }),
+      };
+
+      const result = await cowService.getAllCows(
+        userId,
+        filters,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Cows retrieved successfully",
+        ...result,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * GET /cows/:id
+   * Get a cow by ID
+   */
+  getCowById: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const userId = getUserId(req);
+      const cowId = getCowId(req);
+
+      const cow = await cowService.getCowById(
+        userId,
+        cowId,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Cow retrieved successfully",
+        data: cow,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * PATCH /cows/:id
+   * Update cow details
+   */
+  updateCow: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const userId = getUserId(req);
+      const cowId = getCowId(req);
+
+      const payload = validateCowPayload(
+        req.body,
+        true,
+      );
+
+      const cow = await cowService.updateCow(
+        userId,
+        cowId,
+        payload,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Cow updated successfully",
+        data: cow,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * DELETE /cows/:id
+   * Deactivate a cow (soft delete)
+   */
+  deactivateCow: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const userId = getUserId(req);
+      const cowId = getCowId(req);
+
+      const cow = await cowService.deactivateCow(
+        userId,
+        cowId,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Cow deactivated successfully",
+        data: cow,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * PATCH /cows/:id/weight
+   * Update cow's current weight
+   */
+  updateCowWeight: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const userId = getUserId(req);
+      const cowId = getCowId(req);
+
+      const payload = validateWeightPayload(req.body);
+
+      const cow = await cowService.updateCowWeight(
+        userId,
+        cowId,
+        payload.currentWeightKg,
+        payload.weightMeasuredAt,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Cow weight updated successfully",
+        data: cow,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * GET /cows/:id/offspring
+   * Get offspring of a cow
+   */
+  getOffspring: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const userId = getUserId(req);
+      const cowId = getCowId(req);
+
+      const offspring = await cowService.getOffspring(
+        userId,
+        cowId,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Offspring retrieved successfully",
+        data: offspring,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+};

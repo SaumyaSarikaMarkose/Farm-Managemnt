@@ -224,7 +224,6 @@ export type FarmWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Farm"> | Date | string
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   memberships?: Prisma.FarmMembershipListRelationFilter
-  cows?: Prisma.CowListRelationFilter
   joinRequests?: Prisma.FarmJoinRequestListRelationFilter
 }
 
@@ -241,7 +240,6 @@ export type FarmOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   createdBy?: Prisma.UserOrderByWithRelationInput
   memberships?: Prisma.FarmMembershipOrderByRelationAggregateInput
-  cows?: Prisma.CowOrderByRelationAggregateInput
   joinRequests?: Prisma.FarmJoinRequestOrderByRelationAggregateInput
 }
 
@@ -261,7 +259,6 @@ export type FarmWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Farm"> | Date | string
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   memberships?: Prisma.FarmMembershipListRelationFilter
-  cows?: Prisma.CowListRelationFilter
   joinRequests?: Prisma.FarmJoinRequestListRelationFilter
 }, "id" | "createdById">
 
@@ -309,7 +306,6 @@ export type FarmCreateInput = {
   updatedAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedFarmsInput
   memberships?: Prisma.FarmMembershipCreateNestedManyWithoutFarmInput
-  cows?: Prisma.CowCreateNestedManyWithoutFarmInput
   joinRequests?: Prisma.FarmJoinRequestCreateNestedManyWithoutFarmInput
 }
 
@@ -325,7 +321,6 @@ export type FarmUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.FarmMembershipUncheckedCreateNestedManyWithoutFarmInput
-  cows?: Prisma.CowUncheckedCreateNestedManyWithoutFarmInput
   joinRequests?: Prisma.FarmJoinRequestUncheckedCreateNestedManyWithoutFarmInput
 }
 
@@ -341,7 +336,6 @@ export type FarmUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedFarmsNestedInput
   memberships?: Prisma.FarmMembershipUpdateManyWithoutFarmNestedInput
-  cows?: Prisma.CowUpdateManyWithoutFarmNestedInput
   joinRequests?: Prisma.FarmJoinRequestUpdateManyWithoutFarmNestedInput
 }
 
@@ -357,7 +351,6 @@ export type FarmUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.FarmMembershipUncheckedUpdateManyWithoutFarmNestedInput
-  cows?: Prisma.CowUncheckedUpdateManyWithoutFarmNestedInput
   joinRequests?: Prisma.FarmJoinRequestUncheckedUpdateManyWithoutFarmNestedInput
 }
 
@@ -523,20 +516,6 @@ export type FarmUpdateOneRequiredWithoutJoinRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FarmUpdateToOneWithWhereWithoutJoinRequestsInput, Prisma.FarmUpdateWithoutJoinRequestsInput>, Prisma.FarmUncheckedUpdateWithoutJoinRequestsInput>
 }
 
-export type FarmCreateNestedOneWithoutCowsInput = {
-  create?: Prisma.XOR<Prisma.FarmCreateWithoutCowsInput, Prisma.FarmUncheckedCreateWithoutCowsInput>
-  connectOrCreate?: Prisma.FarmCreateOrConnectWithoutCowsInput
-  connect?: Prisma.FarmWhereUniqueInput
-}
-
-export type FarmUpdateOneRequiredWithoutCowsNestedInput = {
-  create?: Prisma.XOR<Prisma.FarmCreateWithoutCowsInput, Prisma.FarmUncheckedCreateWithoutCowsInput>
-  connectOrCreate?: Prisma.FarmCreateOrConnectWithoutCowsInput
-  upsert?: Prisma.FarmUpsertWithoutCowsInput
-  connect?: Prisma.FarmWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.FarmUpdateToOneWithWhereWithoutCowsInput, Prisma.FarmUpdateWithoutCowsInput>, Prisma.FarmUncheckedUpdateWithoutCowsInput>
-}
-
 export type FarmCreateWithoutCreatedByInput = {
   id?: string
   name?: string
@@ -548,7 +527,6 @@ export type FarmCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.FarmMembershipCreateNestedManyWithoutFarmInput
-  cows?: Prisma.CowCreateNestedManyWithoutFarmInput
   joinRequests?: Prisma.FarmJoinRequestCreateNestedManyWithoutFarmInput
 }
 
@@ -563,7 +541,6 @@ export type FarmUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.FarmMembershipUncheckedCreateNestedManyWithoutFarmInput
-  cows?: Prisma.CowUncheckedCreateNestedManyWithoutFarmInput
   joinRequests?: Prisma.FarmJoinRequestUncheckedCreateNestedManyWithoutFarmInput
 }
 
@@ -620,7 +597,6 @@ export type FarmCreateWithoutMembershipsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedFarmsInput
-  cows?: Prisma.CowCreateNestedManyWithoutFarmInput
   joinRequests?: Prisma.FarmJoinRequestCreateNestedManyWithoutFarmInput
 }
 
@@ -635,7 +611,6 @@ export type FarmUncheckedCreateWithoutMembershipsInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  cows?: Prisma.CowUncheckedCreateNestedManyWithoutFarmInput
   joinRequests?: Prisma.FarmJoinRequestUncheckedCreateNestedManyWithoutFarmInput
 }
 
@@ -666,7 +641,6 @@ export type FarmUpdateWithoutMembershipsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedFarmsNestedInput
-  cows?: Prisma.CowUpdateManyWithoutFarmNestedInput
   joinRequests?: Prisma.FarmJoinRequestUpdateManyWithoutFarmNestedInput
 }
 
@@ -681,7 +655,6 @@ export type FarmUncheckedUpdateWithoutMembershipsInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cows?: Prisma.CowUncheckedUpdateManyWithoutFarmNestedInput
   joinRequests?: Prisma.FarmJoinRequestUncheckedUpdateManyWithoutFarmNestedInput
 }
 
@@ -697,7 +670,6 @@ export type FarmCreateWithoutJoinRequestsInput = {
   updatedAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedFarmsInput
   memberships?: Prisma.FarmMembershipCreateNestedManyWithoutFarmInput
-  cows?: Prisma.CowCreateNestedManyWithoutFarmInput
 }
 
 export type FarmUncheckedCreateWithoutJoinRequestsInput = {
@@ -712,7 +684,6 @@ export type FarmUncheckedCreateWithoutJoinRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.FarmMembershipUncheckedCreateNestedManyWithoutFarmInput
-  cows?: Prisma.CowUncheckedCreateNestedManyWithoutFarmInput
 }
 
 export type FarmCreateOrConnectWithoutJoinRequestsInput = {
@@ -743,7 +714,6 @@ export type FarmUpdateWithoutJoinRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedFarmsNestedInput
   memberships?: Prisma.FarmMembershipUpdateManyWithoutFarmNestedInput
-  cows?: Prisma.CowUpdateManyWithoutFarmNestedInput
 }
 
 export type FarmUncheckedUpdateWithoutJoinRequestsInput = {
@@ -758,83 +728,6 @@ export type FarmUncheckedUpdateWithoutJoinRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.FarmMembershipUncheckedUpdateManyWithoutFarmNestedInput
-  cows?: Prisma.CowUncheckedUpdateManyWithoutFarmNestedInput
-}
-
-export type FarmCreateWithoutCowsInput = {
-  id?: string
-  name?: string
-  address?: string | null
-  phone?: string | null
-  email?: string | null
-  description?: string | null
-  currency?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  createdBy: Prisma.UserCreateNestedOneWithoutCreatedFarmsInput
-  memberships?: Prisma.FarmMembershipCreateNestedManyWithoutFarmInput
-  joinRequests?: Prisma.FarmJoinRequestCreateNestedManyWithoutFarmInput
-}
-
-export type FarmUncheckedCreateWithoutCowsInput = {
-  id?: string
-  name?: string
-  address?: string | null
-  phone?: string | null
-  email?: string | null
-  description?: string | null
-  currency?: string
-  createdById: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  memberships?: Prisma.FarmMembershipUncheckedCreateNestedManyWithoutFarmInput
-  joinRequests?: Prisma.FarmJoinRequestUncheckedCreateNestedManyWithoutFarmInput
-}
-
-export type FarmCreateOrConnectWithoutCowsInput = {
-  where: Prisma.FarmWhereUniqueInput
-  create: Prisma.XOR<Prisma.FarmCreateWithoutCowsInput, Prisma.FarmUncheckedCreateWithoutCowsInput>
-}
-
-export type FarmUpsertWithoutCowsInput = {
-  update: Prisma.XOR<Prisma.FarmUpdateWithoutCowsInput, Prisma.FarmUncheckedUpdateWithoutCowsInput>
-  create: Prisma.XOR<Prisma.FarmCreateWithoutCowsInput, Prisma.FarmUncheckedCreateWithoutCowsInput>
-  where?: Prisma.FarmWhereInput
-}
-
-export type FarmUpdateToOneWithWhereWithoutCowsInput = {
-  where?: Prisma.FarmWhereInput
-  data: Prisma.XOR<Prisma.FarmUpdateWithoutCowsInput, Prisma.FarmUncheckedUpdateWithoutCowsInput>
-}
-
-export type FarmUpdateWithoutCowsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedFarmsNestedInput
-  memberships?: Prisma.FarmMembershipUpdateManyWithoutFarmNestedInput
-  joinRequests?: Prisma.FarmJoinRequestUpdateManyWithoutFarmNestedInput
-}
-
-export type FarmUncheckedUpdateWithoutCowsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  memberships?: Prisma.FarmMembershipUncheckedUpdateManyWithoutFarmNestedInput
-  joinRequests?: Prisma.FarmJoinRequestUncheckedUpdateManyWithoutFarmNestedInput
 }
 
 export type FarmCreateManyCreatedByInput = {
@@ -860,7 +753,6 @@ export type FarmUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.FarmMembershipUpdateManyWithoutFarmNestedInput
-  cows?: Prisma.CowUpdateManyWithoutFarmNestedInput
   joinRequests?: Prisma.FarmJoinRequestUpdateManyWithoutFarmNestedInput
 }
 
@@ -875,7 +767,6 @@ export type FarmUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.FarmMembershipUncheckedUpdateManyWithoutFarmNestedInput
-  cows?: Prisma.CowUncheckedUpdateManyWithoutFarmNestedInput
   joinRequests?: Prisma.FarmJoinRequestUncheckedUpdateManyWithoutFarmNestedInput
 }
 
@@ -898,13 +789,11 @@ export type FarmUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type FarmCountOutputType = {
   memberships: number
-  cows: number
   joinRequests: number
 }
 
 export type FarmCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   memberships?: boolean | FarmCountOutputTypeCountMembershipsArgs
-  cows?: boolean | FarmCountOutputTypeCountCowsArgs
   joinRequests?: boolean | FarmCountOutputTypeCountJoinRequestsArgs
 }
 
@@ -928,13 +817,6 @@ export type FarmCountOutputTypeCountMembershipsArgs<ExtArgs extends runtime.Type
 /**
  * FarmCountOutputType without action
  */
-export type FarmCountOutputTypeCountCowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CowWhereInput
-}
-
-/**
- * FarmCountOutputType without action
- */
 export type FarmCountOutputTypeCountJoinRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FarmJoinRequestWhereInput
 }
@@ -953,7 +835,6 @@ export type FarmSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   memberships?: boolean | Prisma.Farm$membershipsArgs<ExtArgs>
-  cows?: boolean | Prisma.Farm$cowsArgs<ExtArgs>
   joinRequests?: boolean | Prisma.Farm$joinRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.FarmCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["farm"]>
@@ -1003,7 +884,6 @@ export type FarmOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type FarmInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   memberships?: boolean | Prisma.Farm$membershipsArgs<ExtArgs>
-  cows?: boolean | Prisma.Farm$cowsArgs<ExtArgs>
   joinRequests?: boolean | Prisma.Farm$joinRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.FarmCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1019,7 +899,6 @@ export type $FarmPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     createdBy: Prisma.$UserPayload<ExtArgs>
     memberships: Prisma.$FarmMembershipPayload<ExtArgs>[]
-    cows: Prisma.$CowPayload<ExtArgs>[]
     joinRequests: Prisma.$FarmJoinRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1429,7 +1308,6 @@ export interface Prisma__FarmClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   memberships<T extends Prisma.Farm$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farm$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FarmMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  cows<T extends Prisma.Farm$cowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farm$cowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   joinRequests<T extends Prisma.Farm$joinRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farm$joinRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FarmJoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1892,30 +1770,6 @@ export type Farm$membershipsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.FarmMembershipScalarFieldEnum | Prisma.FarmMembershipScalarFieldEnum[]
-}
-
-/**
- * Farm.cows
- */
-export type Farm$cowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Cow
-   */
-  select?: Prisma.CowSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Cow
-   */
-  omit?: Prisma.CowOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CowInclude<ExtArgs> | null
-  where?: Prisma.CowWhereInput
-  orderBy?: Prisma.CowOrderByWithRelationInput | Prisma.CowOrderByWithRelationInput[]
-  cursor?: Prisma.CowWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CowScalarFieldEnum | Prisma.CowScalarFieldEnum[]
 }
 
 /**

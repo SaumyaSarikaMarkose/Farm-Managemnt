@@ -1640,13 +1640,18 @@ export const CowScalarFieldEnum = {
   breed: 'breed',
   gender: 'gender',
   dateOfBirth: 'dateOfBirth',
+  currentWeightKg: 'currentWeightKg',
+  weightMeasuredAt: 'weightMeasuredAt',
   acquiredAt: 'acquiredAt',
   purchasePrice: 'purchasePrice',
+  damId: 'damId',
+  sireId: 'sireId',
+  reproductiveStatus: 'reproductiveStatus',
+  lactationNumber: 'lactationNumber',
   status: 'status',
   stage: 'stage',
   photoUrl: 'photoUrl',
   description: 'description',
-  farmId: 'farmId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1925,6 +1930,34 @@ export type ListEnumCowGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'CowReproductiveStatus'
+ */
+export type EnumCowReproductiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CowReproductiveStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'CowReproductiveStatus[]'
+ */
+export type ListEnumCowReproductiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CowReproductiveStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
  * Reference to a field of type 'CowStatus'
  */
 export type EnumCowStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CowStatus'>
@@ -1953,16 +1986,16 @@ export type ListEnumCowStageFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
- * Reference to a field of type 'Int'
+ * Reference to a field of type 'Float'
  */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
 /**
- * Reference to a field of type 'Int[]'
+ * Reference to a field of type 'Float[]'
  */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**

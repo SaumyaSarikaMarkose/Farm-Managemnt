@@ -70,6 +70,7 @@ enum CowGender {
 
 enum CowStatus {
   ACTIVE
+  INACTIVE
   SOLD
   DECEASED
   TRANSFERRED
@@ -81,6 +82,12 @@ enum CowStage {
   LACTATING
   DRY
   BREEDING
+}
+
+enum CowReproductiveStatus {
+  MILKING
+  PREGNANT
+  DRY
 }
 
 // ==========================================
@@ -159,7 +166,6 @@ model Farm {
   createdBy   User   @relation("FarmCreator", fields: [createdById], references: [id], onDelete: Restrict)
 
   memberships  FarmMembership[]
-  cows         Cow[]
   joinRequests FarmJoinRequest[]
 
   createdAt DateTime @default(now())
@@ -337,28 +343,52 @@ model Cow {
   breed     String?
   gender    CowGender @default(FEMALE)
 
-  dateOfBirth   DateTime?
+  // Basic details
+  dateOfBirth DateTime?
+
+  // Weight details
+  currentWeightKg  Decimal?  @db.Decimal(8, 2)
+  weightMeasuredAt DateTime?
+
+  // Purchase details
   acquiredAt    DateTime?
   purchasePrice Decimal?  @db.Decimal(12, 2)
 
-  status CowStatus @default(ACTIVE)
-  stage  CowStage
+  // Parent relationships
+  damId  String?
+  sireId String?
+
+  dam  Cow? @relation("CowMother", fields: [damId], references: [id], onDelete: SetNull)
+  sire Cow? @relation("CowFather", fields: [sireId], references: [id], onDelete: SetNull)
+
+  offspringAsDam  Cow[] @relation("CowMother")
+  offspringAsSire Cow[] @relation("CowFather")
+
+  // Reproductive details
+  reproductiveStatus CowReproductiveStatus?
+  lactationNumber    Int                    @default(0)
+
+  // Existing management details
+  // Existing management details
+status CowStatus @default(ACTIVE)
+stage  CowStage  @default(HEIFER)
 
   photoUrl    String?
   description String?
 
-  farmId String
-  farm   Farm   @relation(fields: [farmId], references: [id], onDelete: Restrict)
-
+  // Related records
   milkProductions  MilkProduction[]
   feedConsumptions FeedConsumption[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([farmId, tagNumber])
-  @@index([farmId, status])
-  @@index([farmId, stage])
+  @@unique([tagNumber])
+  @@index([status])
+  @@index([stage])
+  @@index([damId])
+  @@index([sireId])
+  @@index([reproductiveStatus])
 }
 
 // ==========================================

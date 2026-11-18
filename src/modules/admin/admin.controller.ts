@@ -24,7 +24,6 @@ export async function pendingAccountsController(
     data: accounts,
   });
 }
-
 export async function approveAccountController(
   req: Request,
   res: Response
@@ -60,14 +59,13 @@ export async function approveAccountController(
     ...result,
   });
 }
-
 // Get all approved members
 export async function allMembersController(
   
   req: Request,
   res: Response
 ) {
-  console.log("kkkkkkkkkkkkkkkkkkkk")
+ 
   const adminId = req.userId;
 
   if (!adminId) {

@@ -1,7 +1,7 @@
 import express from "express";
 
 import authRoutes from "./modules/auth/auth.routes.js";
-import { errorHandler } from "./middleware/error.middleware.js";
+import { errorMiddleware  } from "./middleware/error.middleware.js";
 import { notFoundHandler } from "./middleware/not-found.middleware.js";
 
 import adminRoutes from "./modules/admin/admin.routes.js";
@@ -51,7 +51,7 @@ app.use("/api/financial", financialRoutes);
 app.use("/api/reports", reportsRoutes);
 
 app.use(notFoundHandler);
-app.use(errorHandler);
+app.use(errorMiddleware );
 
 export default app;
 

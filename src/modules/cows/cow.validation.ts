@@ -1,111 +1,214 @@
-const allowedGenders = ["FEMALE", "MALE"] as const;
 
-const allowedStages = [
-  "CALF",
-  "HEIFER",
-  "LACTATING",
-  "DRY",
-  "BREEDING",
-] as const;
+import {
+  CowGender,
+  CowStage,
+  CowStatus,
+  CowReproductiveStatus,
+} from "../../generated/prisma/client.js";
 
-const allowedStatuses = [
-  "ACTIVE",
-  "SOLD",
-  "DECEASED",
-  "TRANSFERRED",
-] as const;
+export interface CowPayload {
+  tagNumber?: string;
+  name?: string | null;
+  breed?: string | null;
+  gender?: CowGender;
+  dateOfBirth?: string | null;
+  currentWeightKg?: number | null;
+  weightMeasuredAt?: string | null;
+  acquiredAt?: string | null;
+  purchasePrice?: number | null;
+  damId?: string | null;
+  sireId?: string | null;
+  reproductiveStatus?: CowReproductiveStatus | null;
+  lactationNumber?: number;
+  status?: CowStatus;
+  stage?: CowStage;
+  photoUrl?: string | null;
+  description?: string | null;
+}
 
-export function validateCreateCow(data: any) {
-  const errors: string[] = [];
+function badRequest(message: string): never {
+  const error = new Error(message) as Error & {
+    statusCode: number;
+  };
 
-  if (!data.tagNumber || typeof data.tagNumber !== "string") {
-    errors.push("Cow tag number is required.");
-  }
+  error.statusCode = 400;
+  throw error;
+}
 
-  if (!data.stage || !allowedStages.includes(data.stage)) {
-    errors.push("A valid cow stage is required.");
-  }
-
-  if (data.gender && !allowedGenders.includes(data.gender)) {
-    errors.push("Invalid cow gender.");
-  }
+function validateDate(value: unknown, field: string) {
+  if (value === null || value === undefined) return;
 
   if (
-    data.purchasePrice !== undefined &&
-    (
-      typeof data.purchasePrice !== "number" ||
-      !Number.isFinite(data.purchasePrice) ||
-      data.purchasePrice < 0
-    )
+    typeof value !== "string" ||
+    Number.isNaN(Date.parse(value))
   ) {
-    errors.push("Purchase price must be a valid non-negative number.");
+    badRequest(`${field} must be a valid date`);
+  }
+}
+
+function validateNumber(
+  value: unknown,
+  field: string,
+  min = 0,
+) {
+  if (value === null || value === undefined) return;
+
+  if (
+    typeof value !== "number" ||
+    !Number.isFinite(value) ||
+    value < min
+  ) {
+    badRequest(`${field} must be a valid number`);
+  }
+}
+
+export function validateCowPayload(
+  body: unknown,
+  partial = false,
+): CowPayload {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    badRequest("Invalid request body");
   }
 
-  for (const field of ["dateOfBirth", "acquiredAt"]) {
-    if (
-      data[field] !== undefined &&
-      data[field] !== null &&
-      (
-        typeof data[field] !== "string" ||
-        Number.isNaN(Date.parse(data[field]))
-      )
-    ) {
-      errors.push(`${field} must be a valid date.`);
+  const input = body as Record<string, unknown>;
+
+  const allowedFields = [
+    "tagNumber",
+    "name",
+    "breed",
+    "gender",
+    "dateOfBirth",
+    "currentWeightKg",
+    "weightMeasuredAt",
+    "acquiredAt",
+    "purchasePrice",
+    "damId",
+    "sireId",
+    "reproductiveStatus",
+    "lactationNumber",
+    "status",
+    "stage",
+    "photoUrl",
+    "description",
+  ];
+
+  for (const key of Object.keys(input)) {
+    if (!allowedFields.includes(key)) {
+      badRequest(`Unknown field: ${key}`);
     }
   }
 
-  return errors;
-}
-
-export function validateUpdateCow(data: any) {
-  const errors: string[] = [];
-
   if (
-    data.tagNumber !== undefined &&
-    (
-      typeof data.tagNumber !== "string" ||
-      !data.tagNumber.trim()
-    )
+    !partial &&
+    (typeof input.tagNumber !== "string" ||
+      !input.tagNumber.trim())
   ) {
-    errors.push("Cow tag number cannot be empty.");
-  }
-
-  if (data.gender !== undefined && !allowedGenders.includes(data.gender)) {
-    errors.push("Invalid cow gender.");
-  }
-
-  if (data.stage !== undefined && !allowedStages.includes(data.stage)) {
-    errors.push("Invalid cow stage.");
+    badRequest("Cow tag number is required");
   }
 
   if (
-    data.purchasePrice !== undefined &&
-    data.purchasePrice !== null &&
-    (
-      typeof data.purchasePrice !== "number" ||
-      !Number.isFinite(data.purchasePrice) ||
-      data.purchasePrice < 0
-    )
+    input.tagNumber !== undefined &&
+    (typeof input.tagNumber !== "string" ||
+      !input.tagNumber.trim())
   ) {
-    errors.push("Purchase price must be a valid non-negative number.");
+    badRequest("Invalid cow tag number");
   }
 
-  for (const field of ["dateOfBirth", "acquiredAt"]) {
+  for (const field of [
+    "name",
+    "breed",
+    "damId",
+    "sireId",
+    "photoUrl",
+    "description",
+  ]) {
+    const value = input[field];
+
     if (
-      data[field] !== undefined &&
-      data[field] !== null &&
-      (
-        typeof data[field] !== "string" ||
-        Number.isNaN(Date.parse(data[field]))
-      )
+      value !== undefined &&
+      value !== null &&
+      typeof value !== "string"
     ) {
-      errors.push(`${field} must be a valid date.`);
+      badRequest(`${field} must be a string`);
     }
   }
 
-  return errors;
+  if (
+    input.gender !== undefined &&
+    !Object.values(CowGender).includes(input.gender as CowGender)
+  ) {
+    badRequest("Invalid gender");
+  }
+
+  if (
+    input.stage !== undefined &&
+    !Object.values(CowStage).includes(input.stage as CowStage)
+  ) {
+    badRequest("Invalid cow stage");
+  }
+
+  if (
+    input.status !== undefined &&
+    !Object.values(CowStatus).includes(input.status as CowStatus)
+  ) {
+    badRequest("Invalid cow status");
+  }
+
+  if (
+    input.reproductiveStatus !== undefined &&
+    input.reproductiveStatus !== null &&
+    !Object.values(CowReproductiveStatus).includes(
+      input.reproductiveStatus as CowReproductiveStatus
+    )
+  ) {
+    badRequest("Invalid reproductive status");
+  }
+
+  validateDate(input.dateOfBirth, "dateOfBirth");
+  validateDate(input.acquiredAt, "acquiredAt");
+  validateDate(input.weightMeasuredAt, "weightMeasuredAt");
+
+  validateNumber(input.currentWeightKg, "currentWeightKg");
+  validateNumber(input.purchasePrice, "purchasePrice");
+
+  if (input.lactationNumber !== undefined) {
+    validateNumber(input.lactationNumber, "lactationNumber");
+
+    if (!Number.isInteger(input.lactationNumber)) {
+      badRequest("Lactation number must be an integer");
+    }
+  }
+
+  return input as CowPayload;
 }
 
-export function validateCowStatus(status: any) {
-  return allowedStatuses.includes(status);
+export function validateWeightPayload(body: unknown) {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    badRequest("Invalid request body");
+  }
+
+  const input = body as Record<string, unknown>;
+
+  if (
+    typeof input.currentWeightKg !== "number" ||
+    !Number.isFinite(input.currentWeightKg) ||
+    input.currentWeightKg <= 0
+  ) {
+    badRequest("Weight must be greater than zero");
+  }
+
+  if (
+    Object.keys(input).some(
+      key => !["currentWeightKg", "weightMeasuredAt"].includes(key)
+    )
+  ) {
+    badRequest("Unknown weight field");
+  }
+
+  validateDate(input.weightMeasuredAt, "weightMeasuredAt");
+
+  return {
+    currentWeightKg: input.currentWeightKg,
+    weightMeasuredAt: input.weightMeasuredAt as string | undefined,
+  };
 }

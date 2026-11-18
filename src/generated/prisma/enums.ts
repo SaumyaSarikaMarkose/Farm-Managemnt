@@ -92,6 +92,7 @@ export type CowGender = (typeof CowGender)[keyof typeof CowGender]
 
 export const CowStatus = {
   ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
   SOLD: 'SOLD',
   DECEASED: 'DECEASED',
   TRANSFERRED: 'TRANSFERRED'
@@ -109,3 +110,12 @@ export const CowStage = {
 } as const
 
 export type CowStage = (typeof CowStage)[keyof typeof CowStage]
+
+
+export const CowReproductiveStatus = {
+  MILKING: 'MILKING',
+  PREGNANT: 'PREGNANT',
+  DRY: 'DRY'
+} as const
+
+export type CowReproductiveStatus = (typeof CowReproductiveStatus)[keyof typeof CowReproductiveStatus]
